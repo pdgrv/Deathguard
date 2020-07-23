@@ -4,20 +4,20 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMovement : MonoBehaviour
-{
-    [SerializeField] private Transform _camera;
+{    
     [SerializeField] private float _speed = 4.0f;
-    [SerializeField] private float _rotationSpeed = 15f;
-    [SerializeField] private float _jumpSpeed = 10f;
-    [SerializeField] private float _gravityModifier = 3f;
+    [SerializeField] private float _rotationSpeed = 12f;
+    [SerializeField] private float _jumpSpeed = 12f;
+    [SerializeField] private float _gravityModifier = 3.5f;
+
+    private CharacterController _characterController;
+    private Animator _animator;
+    private Transform _camera;
 
     private float _gravity = -9.8f;
     private float _minFall = -1.5f;
     private float _vertSpeed;
-
-    private CharacterController _characterController;
-    private Animator _animator;
-
+    
     private float _horizontalInput;
     private float _verticalInput;
 
@@ -27,6 +27,8 @@ public class CharacterMovement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+
+        _camera = Camera.main.transform;
 
         _vertSpeed = _minFall;
     }
@@ -49,15 +51,9 @@ public class CharacterMovement : MonoBehaviour
             _move.z = _verticalInput;
             _move = Vector3.ClampMagnitude(_move * _speed, _speed);
 
-            Quaternion tmp = _camera.rotation;
-            _camera.eulerAngles = new Vector3(0, _camera.eulerAngles.y, 0);
-            _move = _camera.TransformDirection(_move);
-            _camera.rotation = tmp;
-
-            Quaternion direction = Quaternion.LookRotation(_move);
-            transform.rotation = Quaternion.Lerp(transform.rotation, direction, _rotationSpeed * Time.deltaTime);
+            LookDirection();
         }
-        _animator.SetFloat("Speed", _move.magnitude);
+        _animator.SetFloat("Speed", _move.magnitude);        
 
         if (_characterController.isGrounded)
         {
@@ -84,5 +80,16 @@ public class CharacterMovement : MonoBehaviour
         _move.y = _vertSpeed;
 
         _characterController.Move(_move * Time.deltaTime);
+    }
+
+    private void LookDirection()
+    {
+        Quaternion tmp = _camera.rotation;
+        _camera.eulerAngles = new Vector3(0, _camera.eulerAngles.y, 0);
+        _move = _camera.TransformDirection(_move);
+        _camera.rotation = tmp;
+
+        Quaternion lookRotation = Quaternion.LookRotation(_move);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _rotationSpeed * Time.deltaTime);
     }
 }
