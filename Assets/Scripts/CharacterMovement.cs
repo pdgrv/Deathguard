@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController), typeof(Animator))]
 public class CharacterMovement : MonoBehaviour
-{    
+{
     [SerializeField] private float _speed = 4.0f;
     [SerializeField] private float _rotationSpeed = 12f;
     [SerializeField] private float _jumpSpeed = 12f;
@@ -17,7 +17,7 @@ public class CharacterMovement : MonoBehaviour
     private float _gravity = -9.8f;
     private float _minFall = -1.5f;
     private float _vertSpeed;
-    
+
     private float _horizontalInput;
     private float _verticalInput;
 
@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour
 
             LookDirection();
         }
-        _animator.SetFloat("Speed", _move.magnitude);        
+        _animator.SetFloat("Speed", _move.magnitude);
 
         if (_characterController.isGrounded)
         {
@@ -75,7 +75,10 @@ public class CharacterMovement : MonoBehaviour
             {
                 _vertSpeed += _gravity * _gravityModifier * Time.deltaTime;
             }
-            _animator.SetBool("Falling", true);
+            else
+            {
+                _animator.SetBool("Falling", true);
+            }
         }
         _move.y = _vertSpeed;
 

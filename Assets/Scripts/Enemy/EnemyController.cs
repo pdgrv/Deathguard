@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float _lookRadius = 10f;
-    [SerializeField] private float _attackRadius = 1.5f;
     [SerializeField] private Transform _target;
 
     private NavMeshAgent _navMesh;
     private Animator _animator;
-
-    private Transform _startPoint;
 
     private void Start()
     {
