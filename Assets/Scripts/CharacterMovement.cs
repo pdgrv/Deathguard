@@ -75,7 +75,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 _vertSpeed += _gravity * _gravityModifier * Time.deltaTime;
             }
-            else
+            if (_vertSpeed < _gravity / 2)
             {
                 _animator.SetBool("Falling", true);
             }
