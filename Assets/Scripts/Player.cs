@@ -64,12 +64,13 @@ public class Player : MonoBehaviour
     {
         _animator.SetTrigger(attackNumber);
         
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
         _hitbox.enabled = true;
         yield return new WaitForFixedUpdate();
         _hitbox.enabled = false;
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.7f);
         attackID = 1;
+        _animator.ResetTrigger(attackNumber);
     }
 }
