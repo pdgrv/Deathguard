@@ -2,74 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class PlayerActions : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
-
-    private int _currentHealth;
-    private int _level;
-    private int _armor;
-    [SerializeField] private int _totalDamage;
+    [SerializeField] private float _attackDelay = 0.45f;
 
     private Animator _animator;
-    private Weapon _weapon;
-    private Collider _weaponCollider;
     private SphereCollider _hitbox;
 
-    [SerializeField] private float _attackDelay = 0.3f;
     private Coroutine attackJob;
     private int attackID = 1;
     private float _lastAttackTime;
 
-    private int _score;
-
     private void Start()
     {
-        _animator = GetComponent<Animator>();        
+        _animator = GetComponent<Animator>();
 
         _hitbox = GetComponentInChildren<SphereCollider>();
         _hitbox.enabled = false;
-
-        _currentHealth = _maxHealth;
     }
 
     private void Update()
-    {        
-        if (Input.GetButtonDown("Fire1") && _lastAttackTime <=0)
+    {
+        if (Input.GetButtonDown("Fire1") && _lastAttackTime <= 0)
         {
             if (attackID == 1)
             {
                 if (attackJob != null) StopCoroutine(attackJob);
                 attackJob = StartCoroutine(Attack("Attack1"));
                 attackID = 2;
-
             }
             else if (attackID == 2)
             {
-                if (attackJob != null) StopCoroutine(attackJob);                
+                if (attackJob != null) StopCoroutine(attackJob);
                 attackJob = StartCoroutine(Attack("Attack2"));
-                attackID=1;
+                attackID = 1;
             }
+
             _lastAttackTime = _attackDelay;
         }
         _lastAttackTime -= Time.deltaTime;
     }
 
-    public void ApplyDamage(int damage)
+    private IEnumerator Attack(string attackNumber)
     {
-        _currentHealth -= damage;
-    }
+        _animator.SetTrigger(attackNumber);        
 
-    private IEnumerator Attack(string attackNumber) //надеюсь, из-за такого никто не умрет.
-    {
-        _animator.SetTrigger(attackNumber);
-        
         yield return new WaitForSeconds(0.3f);
         _hitbox.enabled = true;
         yield return new WaitForFixedUpdate();
         _hitbox.enabled = false;
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.75f);
         attackID = 1;
         _animator.ResetTrigger(attackNumber);
     }
