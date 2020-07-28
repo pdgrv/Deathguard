@@ -8,13 +8,17 @@ public class Player : MonoBehaviour
 
     private int _currentHealth;
     private int _level;
-    private int _armor;
+    private int _exp;
     [SerializeField] private int _totalDamage;
-
+    private int _armor;
     private int _score;
 
     public int Damage => _totalDamage;
 
+    private void OnEnable()
+    {
+        
+    }
     private void Start()
     {
         _currentHealth = _maxHealth;
@@ -28,10 +32,22 @@ public class Player : MonoBehaviour
         {
             Die();
         }
-    }
+    }    
 
     private void Die()
     {
         Debug.Log("вы проиграли.");
+    }
+
+    public void AddReward(int exp, int score)
+    {
+        _score += score;
+
+        _exp += exp;
+        if (_exp >= 100)
+        {
+            _exp = 0;
+            _level++;
+        }        
     }
 }

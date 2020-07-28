@@ -1834,6 +1834,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 50
+  _damage: 0
+  _expGived: 50
+  _scoreGived: 2
+  _player: {fileID: 1253088706517718}
 --- !u!195 &1137508323
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2196,7 +2200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5d67a05db62334fa90e3ac120ad50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
 --- !u!135 &1323900525
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3473,6 +3476,7 @@ GameObject:
   - component: {fileID: 1762700883}
   - component: {fileID: 1762700882}
   - component: {fileID: 1253088706517718}
+  - component: {fileID: 1253088706517719}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3494,6 +3498,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _totalDamage: 10
+--- !u!114 &1253088706517719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253088706517717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4248f13a8bb5f046ac464fe7d540741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _attackDelay: 0.45
 --- !u!1 &1310638509544057
 GameObject:
