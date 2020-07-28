@@ -5,9 +5,10 @@ using UnityEngine;
 public class AttackState : State
 {
     [SerializeField] private int _damage;
-    [SerializeField] private float _attackDelay;
+    [SerializeField] private float _attackDelay = 2.5f;
 
     private SphereCollider _hitbox;
+    public Coroutine AttackJob { get; private set; }
 
     private void Start()
     {
@@ -23,7 +24,10 @@ public class AttackState : State
 
         if (_lastAttackTime <= 0)
         {
-            StartCoroutine(Attack());
+            if (AttackJob != null)
+                StopCoroutine(AttackJob);
+            AttackJob = StartCoroutine(Attack());
+
             _lastAttackTime = _attackDelay;
         }
         _lastAttackTime -= Time.deltaTime;
@@ -32,11 +36,15 @@ public class AttackState : State
     private IEnumerator Attack()
     {
         Animator.SetTrigger("Attack");
+        var WaitForSplitSecond = new WaitForSeconds(0.9f);
 
-        yield return new WaitForSeconds(0.6f);
+        yield return WaitForSplitSecond;
         _hitbox.enabled = true;
         yield return new WaitForFixedUpdate();
         _hitbox.enabled = false;
+
+        yield return WaitForSplitSecond;
+        AttackJob = null;
     }
 
     private void FaceTarget()

@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     public Player Player => _player;
 
     private Animator _animator;
-    private CharacterController _controller;    
+    private CharacterController _controller;
 
     private void Start()
     {
@@ -37,10 +37,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Die()
+    private void Die()//доделать, нужно остановить state machine 
     {
-        _controller.enabled = false;
-
+        _controller.enabled = false;        
+        
         _animator.SetTrigger("Die");
         Debug.Log(transform.name + "Die...");
 

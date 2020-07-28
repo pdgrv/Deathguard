@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackTransition : Transition
 {
+    private bool _isAttackNow;    
+
     private void Update()
     {
         if (TargetDistance <= NavMesh.stoppingDistance)

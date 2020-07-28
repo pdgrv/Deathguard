@@ -27,7 +27,7 @@ public class HitboxTrigger : MonoBehaviour
         else if (other.TryGetComponent(out Player player))
         {
             player.ApplyDamage(_enemyDamage);
-            Debug.Log(player.name + " отхватил от " + transform.name);            
+            Debug.Log(player.name + " отхватил от " + transform.name);
         }
     }
 }

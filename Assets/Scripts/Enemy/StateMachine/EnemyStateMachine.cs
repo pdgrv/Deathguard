@@ -50,5 +50,5 @@ public class EnemyStateMachine : MonoBehaviour
 
         _currentState = nextState;
         _currentState.Enter(_target, _animator, _navMesh);
-    }
+    }    
 }

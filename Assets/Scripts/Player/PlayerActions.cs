@@ -41,12 +41,13 @@ public class PlayerActions : MonoBehaviour
 
             _lastAttackTime = _attackDelay;
         }
+
         _lastAttackTime -= Time.deltaTime;
     }
 
     private IEnumerator Attack(string attackNumber)
     {
-        _animator.SetTrigger(attackNumber);        
+        _animator.SetTrigger(attackNumber);
 
         yield return new WaitForSeconds(0.3f);
         _hitbox.enabled = true;
