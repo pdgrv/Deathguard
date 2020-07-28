@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(Enemy), typeof(Animator), typeof(NavMeshAgent))]
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private State _fistState;
 
-    private Player _target;
     private Enemy _enemy;
+    private Player _target;
+    private Animator _animator;
+    private NavMeshAgent _navMesh;
 
     private State _currentState;
 
@@ -16,6 +19,9 @@ public class EnemyStateMachine : MonoBehaviour
     {
         _enemy = GetComponent<Enemy>();
         _target = _enemy.Player;
+        _animator = GetComponent<Animator>();
+        _navMesh = GetComponent<NavMeshAgent>();
+
         Reset(_fistState);
     }
 
@@ -34,7 +40,7 @@ public class EnemyStateMachine : MonoBehaviour
         _currentState = startState;
 
         if (_currentState != null)
-            _currentState.Enter(_target);
+            _currentState.Enter(_target, _animator, _navMesh);
     }
 
     private void Transit(State nextState)
@@ -43,6 +49,6 @@ public class EnemyStateMachine : MonoBehaviour
             _currentState.Exit();
 
         _currentState = nextState;
-        _currentState.Enter(_target);
+        _currentState.Enter(_target, _animator, _navMesh);
     }
 }

@@ -646,6 +646,64 @@ Transform:
   m_Father: {fileID: 4532250005728573}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &407718832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407718833}
+  - component: {fileID: 407718835}
+  - component: {fileID: 407718834}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407718833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407718832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.85, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606343613}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &407718834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407718832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5d67a05db62334fa90e3ac120ad50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDamage: 10
+--- !u!135 &407718835
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407718832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &441051540
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,11 +1000,12 @@ GameObject:
   - component: {fileID: 1137508323}
   - component: {fileID: 1137508322}
   - component: {fileID: 1137508331}
+  - component: {fileID: 606309790}
   - component: {fileID: 1137508330}
   - component: {fileID: 1137508329}
   - component: {fileID: 1137508328}
-  - component: {fileID: 1137508321}
   - component: {fileID: 1137508327}
+  - component: {fileID: 1137508321}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -954,6 +1013,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &606309790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606309789}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb471654c695e9d4cb7f1c6325d759e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetState: {fileID: 1137508330}
+  _lookRadius: 10
 --- !u!1 &606309791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,6 +1659,7 @@ Transform:
   - {fileID: 606343667}
   - {fileID: 606343609}
   - {fileID: 606343615}
+  - {fileID: 407718833}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3164,7 +3238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39afce00d674a20438a735d2aeba46fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions: []
+  _transitions:
+  - {fileID: 1137508329}
+  - {fileID: 606309790}
   _damage: 5
   _attackDelay: 5
 --- !u!114 &1137508322
@@ -3251,6 +3327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions:
   - {fileID: 1137508327}
+  - {fileID: 606309790}
 --- !u!114 &1137508329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3264,7 +3341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 1137508328}
-  _lookRadius: 10
 --- !u!114 &1137508330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3615,6 +3691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5d67a05db62334fa90e3ac120ad50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamage: 10
 --- !u!135 &1323900525
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3626,7 +3703,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.73174554
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0.23174551}
 --- !u!1 &1326324500
 GameObject:

@@ -1,21 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
+[RequireComponent(typeof(IdleTransition))]
 public class MoveTransition : Transition
 {
-    [SerializeField] private float _startFollowRadius = 10f;
-
-    private NavMeshAgent _navMesh;
+    private float _followRadius = 10f;
 
     private void Start()
     {
-        _navMesh = GetComponent<NavMeshAgent>();
+        _followRadius = GetComponent<IdleTransition>().LookRadius;
     }
     private void Update()
     {
-        if (TargetDistance <= _startFollowRadius && TargetDistance > _navMesh.stoppingDistance)
+        if (TargetDistance <= _followRadius && TargetDistance > NavMesh.stoppingDistance)
         {
             NeedTransit = true;
         }

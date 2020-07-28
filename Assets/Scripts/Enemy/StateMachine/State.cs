@@ -2,30 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(Animator))]
 public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
-    
-    protected Animator _animator { get; set; }
+
+    protected Animator Animator { get; private set; }
+    protected NavMeshAgent NavMesh { get; private set; }
     protected Player Target { get; private set; }
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
     }
 
-    public void Enter(Player target)
+    public void Enter(Player target, Animator animator, NavMeshAgent navMesh)
     {
         if (enabled == false)
         {
             Target = target;
+            Animator = animator;
+            NavMesh = navMesh;
+
             enabled = true;
             foreach (var transition in _transitions)
             {
                 transition.enabled = true;
-                transition.Init(Target);
+                transition.Init(Target, NavMesh);
             }
         }
     }

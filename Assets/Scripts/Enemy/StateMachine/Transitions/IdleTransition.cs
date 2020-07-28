@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class IdleTransition : Transition
 {
-    [SerializeField] private float _stopFollowRadius = 10f;
-
+    [SerializeField] private float _lookRadius;
+    public float LookRadius => _lookRadius;
+    
     private void Update()
     {
-        if (TargetDistance > _stopFollowRadius)
+        if (TargetDistance > _lookRadius)
         {
             NeedTransit = true;
         }

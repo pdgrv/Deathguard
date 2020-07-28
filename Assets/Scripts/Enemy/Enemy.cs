@@ -15,9 +15,7 @@ public class Enemy : MonoBehaviour
     public Player Player => _player;
 
     private Animator _animator;
-    private CharacterController _controller;
-
-    private int _currentHealth;
+    private CharacterController _controller;    
 
     private void Start()
     {
@@ -29,7 +27,7 @@ public class Enemy : MonoBehaviour
     {
         _health -= damage;
 
-        if (_currentHealth > 0)
+        if (_health > 0)
         {
             _animator.SetTrigger("ApplyDamage");
         }
