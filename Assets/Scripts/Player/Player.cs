@@ -14,11 +14,7 @@ public class Player : MonoBehaviour
     private int _score;
 
     public int Damage => _totalDamage;
-
-    private void OnEnable()
-    {
         
-    }
     private void Start()
     {
         _currentHealth = _maxHealth;

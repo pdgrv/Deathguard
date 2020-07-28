@@ -8,11 +8,14 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private State _fistState;
 
     private Player _target;
+    private Enemy _enemy;
+
     private State _currentState;
 
     private void Start()
     {
-        _target = GetComponent<Enemy>().Player;
+        _enemy = GetComponent<Enemy>();
+        _target = _enemy.Player;
         Reset(_fistState);
     }
 

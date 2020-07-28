@@ -12,10 +12,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _scoreGived;
     [SerializeField] private Player _player;
 
-    public Player Player => _player; 
+    public Player Player => _player;
 
     private Animator _animator;
-    private EnemyController _enemyController;
     private CharacterController _controller;
 
     private int _currentHealth;
@@ -23,8 +22,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _enemyController = GetComponent<EnemyController>();
-        _controller = GetComponent<CharacterController>();        
+        _controller = GetComponent<CharacterController>();
     }
 
     public void ApplyDamage(int damage)
@@ -42,9 +40,8 @@ public class Enemy : MonoBehaviour
     }
 
     private void Die()
-    {        
-        _enemyController.enabled = false;
-        _controller.enabled = false; 
+    {
+        _controller.enabled = false;
 
         _animator.SetTrigger("Die");
         Debug.Log(transform.name + "Die...");
