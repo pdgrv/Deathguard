@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
+[RequireComponent(typeof(NavMeshAgent), typeof(Animator),typeof(Enemy))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float _lookRadius = 10f;
-    [SerializeField] private Transform _target;
+
+    private Transform _target;
 
     private NavMeshAgent _navMesh;
     private Animator _animator;
@@ -16,6 +17,7 @@ public class EnemyController : MonoBehaviour
     {
         _navMesh = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        _target = GetComponent<Enemy>().Player.transform;
     }
 
     private void Update()

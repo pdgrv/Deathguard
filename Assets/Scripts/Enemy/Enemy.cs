@@ -6,11 +6,13 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _health;
     [SerializeField] private int _damage;
     [SerializeField] private int _expGived;
     [SerializeField] private int _scoreGived;
     [SerializeField] private Player _player;
+
+    public Player Player => _player; 
 
     private Animator _animator;
     private EnemyController _enemyController;
@@ -22,14 +24,12 @@ public class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _enemyController = GetComponent<EnemyController>();
-        _controller = GetComponent<CharacterController>();
-
-        _currentHealth = _maxHealth;
+        _controller = GetComponent<CharacterController>();        
     }
 
     public void ApplyDamage(int damage)
     {
-        _currentHealth -= damage;
+        _health -= damage;
 
         if (_currentHealth > 0)
         {
