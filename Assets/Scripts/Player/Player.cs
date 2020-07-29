@@ -7,18 +7,18 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHealth;
 
     private int _currentHealth;
-    private int _level;
+    private int _level = 1;
     private int _exp;
     [SerializeField] private int _totalDamage;
     private int _armor;
     private int _score;
+    
+    public int Damage => _totalDamage;        
 
-    public int Damage => _totalDamage;
-        
     private void Start()
     {
         _currentHealth = _maxHealth;
-    }       
+    }
 
     public void ApplyDamage(int damage)
     {
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         {
             Die();
         }
-    }    
+    }
 
     private void Die()
     {
@@ -40,10 +40,10 @@ public class Player : MonoBehaviour
         _score += score;
 
         _exp += exp;
-        if (_exp >= 100)
+        if (_exp >= 100 * _level)
         {
             _exp = 0;
             _level++;
-        }        
+        }
     }
 }

@@ -14,13 +14,15 @@ public class Enemy : MonoBehaviour
 
     public Player Player => _player;
 
+    public int Damage => _damage;
+
     private Animator _animator;
     private CharacterController _controller;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _controller = GetComponent<CharacterController>();
+        _controller = GetComponent<CharacterController>();        
     }
 
     public void ApplyDamage(int damage)
