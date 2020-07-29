@@ -6,7 +6,7 @@ namespace CartoonHeroes
 {
     public class SetCharacter : MonoBehaviour
     {
-
+        
         public Transform characterRoot;
         public ItemGroup[] itemGroups;
 
@@ -45,11 +45,11 @@ namespace CartoonHeroes
 
         public bool VisibleItems()
         {
-            for (int i = 0; i < itemGroups.Length; i++)
+            for(int i = 0; i < itemGroups.Length; i++)
             {
-                for (int n = 0; n < itemGroups[i].items.Length; n++)
+                for(int n = 0; n < itemGroups[i].items.Length; n++)
                 {
-                    if (HasItem(itemGroups[i], n))
+                    if(HasItem(itemGroups[i], n))
                     {
                         return true;
                     }
@@ -73,9 +73,8 @@ namespace CartoonHeroes
                         break;
                     }
                 }
-            }
-            else
-            {
+             }
+            else {
                 if (disabledGraySkeleton != null)
                 {
                     disabledGraySkeleton.SetActive(true);
@@ -93,7 +92,7 @@ namespace CartoonHeroes
                 Transform prefab = itemGroup.items[itemSlot].prefab.transform;
                 for (int i = 0; i < root.childCount; i++)
                 {
-                    Transform child = root.GetChild(i);
+                    Transform child = root.GetChild(i); 
                     if (child.name.Contains(prefab.name) && child.name.Contains(namePrefix))
                     {
                         return true;
@@ -111,14 +110,14 @@ namespace CartoonHeroes
             itemInstance.transform.position = transform.position;
             itemInstance.transform.parent = transform;
 
-            string[] allItemChildren_NewNames = new string[allItemChildren.Length];
+            string[] allItemChildren_NewNames= new string[allItemChildren.Length];
 
-            for (int i = 0; i < allItemChildren.Length; i++)
+            for(int i = 0; i < allItemChildren.Length; i++)
             {
                 //Match and parent bones
                 for (int n = 0; n < allCharacterChildren.Length; n++)
                 {
-                    if (allItemChildren[i].name == allCharacterChildren[n].name)
+                    if(allItemChildren[i].name == allCharacterChildren[n].name)
                     {
                         MatchTransform(allItemChildren[i], allCharacterChildren[n]);
                         allItemChildren[i].parent = allCharacterChildren[n];
@@ -139,7 +138,7 @@ namespace CartoonHeroes
                 }
             }
 
-            for (int i = 0; i < allItemChildren.Length; i++)
+            for(int i = 0; i < allItemChildren.Length; i++)
             {
                 allItemChildren[i].name = allItemChildren_NewNames[i];
             }
@@ -181,7 +180,7 @@ namespace CartoonHeroes
 
         public bool BelongsToItem(Transform obj, ItemGroup itemGroup, int itemSlot)
         {
-            if (obj == null || itemGroup.items[itemSlot].prefab == null)
+            if(obj == null || itemGroup.items[itemSlot].prefab == null)
             {
                 return false;
             }
@@ -191,7 +190,7 @@ namespace CartoonHeroes
         public void RemoveAnimator(GameObject item)
         {
             Animator animator = item.GetComponent<Animator>();
-            if (animator != null)
+            if(animator != null)
             {
                 DestroyImmediate(animator);
             }
@@ -211,7 +210,7 @@ namespace CartoonHeroes
 
             for (int i = 0; i < allChildren.Length; i++)
             {
-                if (BelongsToItem(allChildren[i], itemGroup, itemSlot))
+                if(BelongsToItem(allChildren[i], itemGroup, itemSlot))
                 {
                     //DestroyImmediate(allChildren[i].gameObject);
                     removeList.Add(allChildren[i].gameObject);

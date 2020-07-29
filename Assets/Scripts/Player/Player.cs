@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int _totalDamage;
     private int _armor;
     private int _score;
-    
-    public int Damage => _totalDamage;        
+
+    public int Damage => _totalDamage;
 
     private void Start()
     {

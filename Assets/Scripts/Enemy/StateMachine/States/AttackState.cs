@@ -44,6 +44,7 @@ public class AttackState : State
         _hitbox.enabled = false;
 
         yield return WaitForSplitSecond;
+        Animator.ResetTrigger("ApplyDamage");
         AttackJob = null;
     }
 

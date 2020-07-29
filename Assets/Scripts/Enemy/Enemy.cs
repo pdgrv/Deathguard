@@ -12,37 +12,32 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _scoreGived;
     [SerializeField] private Player _player;
 
-    public Player Player => _player;
-
-    public int Damage => _damage;
-
     private Animator _animator;
     private CharacterController _controller;
+
+    public Player Player => _player;
+    public int Damage => _damage;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _controller = GetComponent<CharacterController>();        
+        _controller = GetComponent<CharacterController>();
     }
 
     public void ApplyDamage(int damage)
     {
         _health -= damage;
 
-        if (_health > 0)
-        {
-            _animator.SetTrigger("ApplyDamage");
-        }
-        else
-        {
+        if (_health <= 0)
             Die();
-        }
+        else
+            _animator.SetTrigger("ApplyDamage");       
     }
 
     private void Die()//доделать, нужно остановить state machine 
     {
-        _controller.enabled = false;        
-        
+        _controller.enabled = false;
+
         _animator.SetTrigger("Die");
         Debug.Log(transform.name + "Die...");
 
