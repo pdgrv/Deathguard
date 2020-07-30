@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator),typeof(Player))]
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] private float _attackDelay = 0.45f;
@@ -49,7 +49,7 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetButtonDown("Fire3"))
         {
             Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius, 1 << 11); //так не получится сделать подсветку 
-            foreach (Collider hitCollider in hitColliders)                                                        //при возможности активации. 
+            foreach (Collider hitCollider in hitColliders)                                                        //при возможности активации.
             {
                 if (hitCollider.TryGetComponent(out InteractableObject usedObject))
                 {
@@ -59,7 +59,7 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack(string attackNumber) //мб переделать на physics.overlap
+    private IEnumerator Attack(string attackNumber) //переделать на physics.overlap
     {
         _animator.SetTrigger(attackNumber);
 

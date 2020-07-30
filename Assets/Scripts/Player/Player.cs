@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Armor))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 100;
-    [SerializeField] private int _expNeeded = 15;
-    [SerializeField] private int _expNeededMultiply = 2;
+    [SerializeField] private int _maxExp = 15;
+    [SerializeField] private int _maxExpMultiplyer = 2;
     [SerializeField] private int _increaseHpOnLvlup = 10;
+
+    private Armor _armor;
 
     private int _currentHealth;
     private int _level = 1;
@@ -17,13 +21,18 @@ public class Player : MonoBehaviour
 
     private bool _hasKey;
 
-    private Armor _armor;
+    public event UnityAction<int,int> HealthChanged;
+
+    public event UnityAction<int, int> ExpChanged;
 
     private void Start()
     {
         _armor = GetComponent<Armor>();
 
         _currentHealth = _maxHealth;
+
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
+        ExpChanged?.Invoke(_currentExp, _maxExp);
     }
 
     public void ApplyDamage(int damage)
@@ -32,6 +41,8 @@ public class Player : MonoBehaviour
         damage = damage < 0 ? 0 : damage;
 
         _currentHealth -= damage;
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
+
         if (_currentHealth <= 0)
         {
             Die();
@@ -43,6 +54,7 @@ public class Player : MonoBehaviour
         heal = _currentHealth <= _maxHealth - heal ? heal : _maxHealth - _currentHealth;
 
         _currentHealth += heal;
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
     private void Die()
@@ -55,7 +67,8 @@ public class Player : MonoBehaviour
         _score += score;
 
         _currentExp += exp;
-        if (_currentExp >= _expNeeded)
+        ExpChanged?.Invoke(_currentExp, _maxExp);
+        if (_currentExp >= _maxExp)
         {
             LevelUp();
         }
@@ -63,11 +76,15 @@ public class Player : MonoBehaviour
 
     private void LevelUp()
     {
-        _currentExp = _currentExp - _expNeeded;
-        _expNeeded *= _expNeededMultiply;
+        _currentExp = _currentExp - _maxExp;
+        _maxExp *= _maxExpMultiplyer;
+        ExpChanged?.Invoke(_currentExp, _maxExp);
 
         _level++;
-        _maxHealth += _increaseHpOnLvlup;        
+
+        _maxHealth += _increaseHpOnLvlup;
+        _currentHealth += _increaseHpOnLvlup;
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
     public void FindKey()
