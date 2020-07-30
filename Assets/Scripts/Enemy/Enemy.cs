@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     {
         _health -= damage;
 
-        if (_health <= 0)
+        if (_health < 0)
             Die();
         else
             _animator.SetTrigger("ApplyDamage");       

@@ -2,32 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Armor))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private int _expNeeded = 15;
+    [SerializeField] private int _expNeededMultiply = 2;
+    [SerializeField] private int _increaseHpOnLvlup = 10;
 
     private int _currentHealth;
     private int _level = 1;
-    private int _exp;
-    [SerializeField] private int _totalDamage;
-    private int _armor;
+    private int _currentExp = 0;
     private int _score;
 
-    public int Damage => _totalDamage;
+    private Armor _armor;
 
     private void Start()
     {
+        _armor = GetComponent<Armor>();
+
         _currentHealth = _maxHealth;
     }
 
     public void ApplyDamage(int damage)
     {
-        _currentHealth -= damage;
+        damage -= _armor.Value;
+        damage = damage < 0 ? 0 : damage;
 
+        _currentHealth -= damage;
         if (_currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    public void ApplyHeal(int heal)
+    {
+        heal = _currentHealth <= _maxHealth - heal ? heal : _maxHealth - _currentHealth;
+
+        _currentHealth += heal;
     }
 
     private void Die()
@@ -39,11 +52,19 @@ public class Player : MonoBehaviour
     {
         _score += score;
 
-        _exp += exp;
-        if (_exp >= 100 * _level)
+        _currentExp += exp;
+        if (_currentExp >= _expNeeded)
         {
-            _exp = 0;
-            _level++;
+            LevelUp();
         }
+    }
+
+    private void LevelUp()
+    {
+        _currentExp = _currentExp - _expNeeded;
+        _expNeeded *= _expNeededMultiply;
+
+        _level++;
+        _maxHealth += _increaseHpOnLvlup;
     }
 }

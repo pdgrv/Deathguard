@@ -7,7 +7,8 @@ public class Armor : MonoBehaviour
 {
     private SetCharacter _setCharacter;
 
-    private int _armor;
+    public int Value { get; private set; }
+
     private int _armorTier;
 
     private void Start()
@@ -25,15 +26,7 @@ public class Armor : MonoBehaviour
         ChangeArmorStats();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown("i"))
-        {
-            GetNextArmor();
-        }
-    }
-
-    private void GetNextArmor()
+    public void IncreaseTier()
     {
         _setCharacter.RemoveItem(_setCharacter.itemGroups[0], _armorTier);
         _setCharacter.RemoveItem(_setCharacter.itemGroups[1], _armorTier);
@@ -41,7 +34,7 @@ public class Armor : MonoBehaviour
         if (_armorTier < 3)
             _armorTier++;
         else
-            _armorTier = 0;
+            _armorTier = 0; // изменить на условие 
 
         _setCharacter.AddItem(_setCharacter.itemGroups[0], _armorTier);
         _setCharacter.AddItem(_setCharacter.itemGroups[1], _armorTier);
@@ -54,16 +47,16 @@ public class Armor : MonoBehaviour
         switch (_armorTier)
         {
             case 0:
-                _armor = 0;
+                Value = 0;
                 break;
             case 1:
-                _armor = 5;
+                Value = 5;
                 break;
             case 2:
-                _armor = 10;
+                Value = 10;
                 break;
             case 3:
-                _armor = 15;
+                Value = 15;
                 break;
         }
     }
