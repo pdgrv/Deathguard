@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxExpMultiplyer = 2;
     [SerializeField] private int _increaseHpOnLvlup = 10;
 
-    private Armor _armor; // изменить все-таки на значения и events от armor weapon
+    private Armor _armor; // изменить все-таки на значения и events от armor weapon и в actions
 
     private int _currentHealth;
     private int _level = 1;
@@ -22,8 +22,8 @@ public class Player : MonoBehaviour
     private bool _hasKey;
 
     public event UnityAction<int, int> HealthChanged;
-
     public event UnityAction<int, int> ExpChanged;
+    public event UnityAction<int> LevelChanged;
 
     private void Start()
     {
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
 
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
         ExpChanged?.Invoke(_currentExp, _maxExp);
+        LevelChanged?.Invoke(_level);
     }
 
     public void ApplyDamage(int damage)
@@ -81,6 +82,7 @@ public class Player : MonoBehaviour
         ExpChanged?.Invoke(_currentExp, _maxExp);
 
         _level++;
+        LevelChanged?.Invoke(_level);
 
         _maxHealth += _increaseHpOnLvlup;
         _currentHealth += _increaseHpOnLvlup;

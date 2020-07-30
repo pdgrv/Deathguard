@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CartoonHeroes;
+using UnityEngine.Events;
 
 public class Armor : MonoBehaviour
 {
     private SetCharacter _setCharacter;
 
     public int Value { get; private set; }
+    public UnityAction<int> ArmorChanged;
 
     private int _armorTier;
 
@@ -59,5 +61,6 @@ public class Armor : MonoBehaviour
                 Value = 15;
                 break;
         }
+        ArmorChanged?.Invoke(Value);
     }
 }
