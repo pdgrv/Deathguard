@@ -61,6 +61,7 @@ public class Armor : MonoBehaviour
                 Value = 15;
                 break;
         }
+
         ArmorChanged?.Invoke(Value);
     }
 }
