@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public abstract class Bar : MonoBehaviour
 {
+    [SerializeField] protected Player _player;
     [SerializeField] protected Slider Slider;
 
     protected void OnValueChanged(int value, int maxValue)
