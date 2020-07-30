@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator),typeof(CharacterController))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private int _damage;
     [SerializeField] private int _expGived;
     [SerializeField] private int _scoreGived;
-    [SerializeField] private Player _player;
+    [SerializeField] private Player _target;
 
     private Animator _animator;
     private CharacterController _controller;
 
-    public Player Player => _player;
+    public Player Target => _target;
     public int Damage => _damage;
 
     private void Start()
@@ -41,6 +41,6 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("Die");
         Debug.Log(transform.name + "Die...");
 
-        _player.AddReward(_expGived, _scoreGived);
+        _target.AddReward(_expGived, _scoreGived);
     }
 }

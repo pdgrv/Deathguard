@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(IdleTransition))]
 public class MoveTransition : Transition
 {
-    private float _followRadius = 10f;
+    private float _followRadius;
 
     private bool _isAttackNow;
 

@@ -9,18 +9,18 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private State _fistState;
 
     private Enemy _enemy;
-    private Player _target;
     private Animator _animator;
     private NavMeshAgent _navMesh;
+    private Player _target;
 
     private State _currentState;
 
     private void Start()
     {
         _enemy = GetComponent<Enemy>();
-        _target = _enemy.Player;
         _animator = GetComponent<Animator>();
         _navMesh = GetComponent<NavMeshAgent>();
+        _target = _enemy.Target;
 
         Reset(_fistState);
     }

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private int _currentExp = 0;
     private int _score;
 
-    public bool HasKey { get; set; }
+    private bool _hasKey;
 
     private Armor _armor;
 
@@ -68,5 +68,10 @@ public class Player : MonoBehaviour
 
         _level++;
         _maxHealth += _increaseHpOnLvlup;        
+    }
+
+    public void FindKey()
+    {
+        _hasKey = true;
     }
 }

@@ -6,6 +6,6 @@ public class Key : InteractableObject
 {
     protected override void Use(Player player)
     {
-        player.HasKey = true;
+        player.FindKey();
     }
 }

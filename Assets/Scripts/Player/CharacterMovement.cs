@@ -10,6 +10,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _jumpSpeed = 12f;
     [SerializeField] private float _gravityModifier = 3.5f;
 
+    private float _speedMultiplier = 1f;
+
     private CharacterController _characterController;
     private Animator _animator;
     private Transform _camera;
@@ -31,6 +33,7 @@ public class CharacterMovement : MonoBehaviour
         _camera = Camera.main.transform;
 
         _vertSpeed = _minFall;
+        _animator.SetFloat("SpeedMultiplier", _speedMultiplier);
     }
 
     private void Update()
@@ -49,7 +52,7 @@ public class CharacterMovement : MonoBehaviour
         {
             _move.x = _horizontalInput;
             _move.z = _verticalInput;
-            _move = Vector3.ClampMagnitude(_move * _speed, _speed);
+            _move = Vector3.ClampMagnitude(_move * _speed * _speedMultiplier, _speed * _speedMultiplier);
 
             LookDirection();
         }
@@ -94,5 +97,11 @@ public class CharacterMovement : MonoBehaviour
 
         Quaternion lookRotation = Quaternion.LookRotation(_move);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _rotationSpeed * Time.deltaTime);
+    }
+
+    public void IncreaseSpeed(float multiplier)
+    {
+        _speedMultiplier *= multiplier;
+        _animator.SetFloat("SpeedMultiplier", _speedMultiplier);
     }
 }
