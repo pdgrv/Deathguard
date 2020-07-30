@@ -8,7 +8,7 @@ public class ExpBar : Bar
 
     private void OnEnable()
     {
-        _player.ExpChanged += OnValueChanged;        
+        _player.ExpChanged += OnValueChanged;
     }
 
     private void OnDisable()

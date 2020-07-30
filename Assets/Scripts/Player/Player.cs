@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxExpMultiplyer = 2;
     [SerializeField] private int _increaseHpOnLvlup = 10;
 
-    private Armor _armor;
+    private Armor _armor; // изменить все-таки на значения и events от armor weapon
 
     private int _currentHealth;
     private int _level = 1;
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     private bool _hasKey;
 
-    public event UnityAction<int,int> HealthChanged;
+    public event UnityAction<int, int> HealthChanged;
 
     public event UnityAction<int, int> ExpChanged;
 
