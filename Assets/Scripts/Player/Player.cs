@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     private int _currentExp = 0;
     private int _score;
 
+    public bool HasKey { get; set; }
+
     private Armor _armor;
 
     private void Start()
@@ -65,6 +67,6 @@ public class Player : MonoBehaviour
         _expNeeded *= _expNeededMultiply;
 
         _level++;
-        _maxHealth += _increaseHpOnLvlup;
+        _maxHealth += _increaseHpOnLvlup;        
     }
 }

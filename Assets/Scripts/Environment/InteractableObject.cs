@@ -16,9 +16,9 @@ public abstract class InteractableObject : MonoBehaviour
         if (!_isUsed)
         {
             _isUsed = true;
-            Logic(player);
+            Use(player);
         }
     }
 
-    protected abstract void Logic(Player player);
+    protected abstract void Use(Player player);
 }

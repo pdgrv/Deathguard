@@ -6,7 +6,7 @@ public class Grindstone : InteractableObject
 {
     [SerializeField] private int _damage = 5;
 
-    protected override void Logic(Player player)
+    protected override void Use(Player player)
     {
         player.GetComponent<Weapon>().AddModifier(_damage);
     }
