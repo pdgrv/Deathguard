@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     public event UnityAction<int, int> ExpChanged;
     public event UnityAction<int> LevelChanged;
 
+    public bool IsAlive = true;
+
     private void Start()
     {
         _armor = GetComponent<Armor>();
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("вы проиграли.");
+        IsAlive = false;
     }
 
     public void AddReward(int exp, int score)
