@@ -46,7 +46,6 @@ public class Enemy : MonoBehaviour
 
     public void Init(Player target)
     {
-        _target = target;
-        _controller.transform.LookAt(_target.transform);
+        _target = target;        
     }
 }

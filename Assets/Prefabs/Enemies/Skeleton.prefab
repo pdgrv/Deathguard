@@ -658,7 +658,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2444941741341084872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.58, y: 0, z: -11.83}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2444941741341446310}
@@ -742,7 +742,7 @@ MonoBehaviour:
   _health: 50
   _damage: 15
   _expGived: 10
-  _scoreGived: 10
+  _scoreGived: 0
   _target: {fileID: 0}
 --- !u!114 &2444941740764200638
 MonoBehaviour:
@@ -770,7 +770,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 2444941740764200639}
-  _lookRadius: 10
 --- !u!114 &2444941740764200639
 MonoBehaviour:
   m_ObjectHideFlags: 0

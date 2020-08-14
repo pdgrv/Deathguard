@@ -5882,9 +5882,10 @@ MonoBehaviour:
       type: 3}
     Delay: 2
     Count: 8
-  - Template: {fileID: 0}
-    Delay: 0
-    Count: 0
+  - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
+      type: 3}
+    Delay: 2
+    Count: 16
   - Template: {fileID: 0}
     Delay: 0
     Count: 0
@@ -17674,6 +17675,7 @@ MonoBehaviour:
   _maxExp: 15
   _maxExpMultiplyer: 2
   _increaseHpOnLvlup: 10
+  IsAlive: 1
 --- !u!114 &729033656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37178,6 +37180,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 2444941741341084875, guid: 826e8446eddafdb4b9307e46eb2102e9,
+        type: 3}
+      propertyPath: _lookRadius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2444941741341446376, guid: 826e8446eddafdb4b9307e46eb2102e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -38560,10 +38567,10 @@ RectTransform:
   m_Father: {fileID: 1938067859}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.016, y: 0.8384732}
-  m_AnchorMax: {x: 0.278602, y: 0.98716897}
-  m_AnchoredPosition: {x: -0.28997803, y: 0.16000366}
-  m_SizeDelta: {x: 0.443573, y: 0.6019287}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 129.71008, y: -65.84}
+  m_SizeDelta: {x: 232.44357, y: 112.60193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1550511690
 PrefabInstance:
