@@ -743,7 +743,6 @@ MonoBehaviour:
   _damage: 15
   _expGived: 10
   _scoreGived: 0
-  _target: {fileID: 0}
 --- !u!114 &2444941740764200638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51614f5b2de0d504c908022323803f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fistState: {fileID: 2444941740764200639}
+  _fistState: {fileID: 2444941740764200637}
 --- !u!114 &2444941741341084875
 MonoBehaviour:
   m_ObjectHideFlags: 0

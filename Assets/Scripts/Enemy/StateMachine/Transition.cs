@@ -29,6 +29,6 @@ public abstract class Transition : MonoBehaviour
 
     private void OnEnable()
     {
-        NeedTransit = false;
+        NeedTransit = false;        
     }
 }

@@ -10,12 +10,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private int _expGived;
     [SerializeField] private int _scoreGived;
-    [SerializeField] private Player _target;
 
     private Animator _animator;
     private CharacterController _controller;
 
-    public Player Target => _target;
+    public Player Target { get; private set; }
     public int Damage => _damage;
 
     private void Start()
@@ -41,11 +40,11 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("Die");
         Debug.Log(transform.name + "Die...");
 
-        _target.AddReward(_expGived, _scoreGived);
+        Target.AddReward(_expGived, _scoreGived);
     }
 
     public void Init(Player target)
     {
-        _target = target;        
+        Target = target;
     }
 }

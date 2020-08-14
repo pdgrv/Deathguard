@@ -6,7 +6,7 @@ public class AttackTransition : Transition
 {
     private void Update()
     {
-        if (TargetDistance <= NavMesh.stoppingDistance && Target.IsAlive)
+        if (Target != null && TargetDistance <= NavMesh.stoppingDistance && Target.IsAlive)
         {
             NeedTransit = true;
         }
