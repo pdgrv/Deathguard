@@ -43,4 +43,10 @@ public class Enemy : MonoBehaviour
 
         _target.AddReward(_expGived, _scoreGived);
     }
+
+    public void Init(Player target)
+    {
+        _target = target;
+        _controller.transform.LookAt(_target.transform);
+    }
 }
