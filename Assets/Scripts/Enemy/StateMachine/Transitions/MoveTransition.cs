@@ -10,7 +10,7 @@ public class MoveTransition : Transition
     {
         _isAttackNow = GetComponent<AttackState>().AttackJob != null;
 
-        if (TargetDistance > NavMesh.stoppingDistance && !_isAttackNow)
+        if (TargetDistance > NavMesh.stoppingDistance && !_isAttackNow && Target.IsAlive)
         {
             NeedTransit = true;
         }
