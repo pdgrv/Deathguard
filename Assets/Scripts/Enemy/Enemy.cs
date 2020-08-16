@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Animator),typeof(CharacterController))]
+[RequireComponent(typeof(Animator), typeof(CharacterController))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
-    [SerializeField] private int _damage;
     [SerializeField] private int _expGived;
     [SerializeField] private int _scoreGived;
 
@@ -15,7 +14,6 @@ public class Enemy : MonoBehaviour
     private CharacterController _controller;
 
     public Player Target { get; private set; }
-    public int Damage => _damage;
 
     private void Start()
     {
@@ -30,7 +28,7 @@ public class Enemy : MonoBehaviour
         if (_health < 0)
             Die();
         else
-            _animator.SetTrigger("ApplyDamage");       
+            _animator.SetTrigger("ApplyDamage");
     }
 
     private void Die()//доделать, нужно остановить state machine 

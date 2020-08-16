@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Armor : MonoBehaviour
 {
-    [SerializeField] private int _armorMultiplier = 3;
+    [SerializeField] private int _armorGive = 3;
 
     private SetCharacter _setCharacter;
 
@@ -48,7 +48,7 @@ public class Armor : MonoBehaviour
 
     private void ChangeArmorStats()
     {
-        Value = _armorMultiplier * _armorTier;
+        Value = _armorGive * _armorTier;
 
         ArmorChanged?.Invoke(Value);
     }

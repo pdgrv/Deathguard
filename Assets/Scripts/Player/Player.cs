@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Armor))]
+[RequireComponent(typeof(Armor), typeof(Weapon))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 100;
@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _increaseHpOnLvlup = 10;
 
     private Armor _armor; // изменить все-таки на значения и events от armor weapon и в actions
+    private Weapon _weapon;
 
     private int _currentHealth;
     private int _level = 1;
@@ -25,17 +26,40 @@ public class Player : MonoBehaviour
     public event UnityAction<int, int> ExpChanged;
     public event UnityAction<int> LevelChanged;
 
+    public int TotalDamage { get; private set; }
     public bool IsAlive = true;
+
+    private void Awake()
+    {
+        _weapon = GetComponent<Weapon>();
+    }
 
     private void Start()
     {
         _armor = GetComponent<Armor>();
+        //_weapon = GetComponent<Weapon>();
 
         _currentHealth = _maxHealth;
 
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
         ExpChanged?.Invoke(_currentExp, _maxExp);
         LevelChanged?.Invoke(_level);
+    }
+
+    private void OnEnable()
+    {
+       
+        _weapon.DamageChanged += OnDamageChanged;
+    }
+
+    private void OnDisable()
+    {
+        _weapon.DamageChanged -= OnDamageChanged;
+    }
+
+    private void OnDamageChanged(int weaponDamage)
+    {
+        TotalDamage = weaponDamage;
     }
 
     public void ApplyDamage(int damage)

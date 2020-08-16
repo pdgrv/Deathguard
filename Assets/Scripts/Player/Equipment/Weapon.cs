@@ -9,8 +9,6 @@ public class Weapon : MonoBehaviour
 
     private List<int> _modifiers = new List<int>();
 
-    public int Damage => _damage;
-
     public UnityAction<int> DamageChanged;
 
     private void Start()

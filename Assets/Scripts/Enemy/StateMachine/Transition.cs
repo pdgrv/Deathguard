@@ -12,7 +12,7 @@ public abstract class Transition : MonoBehaviour
     protected Player Target { get; private set; }
     protected NavMeshAgent NavMesh { get; private set; }
 
-    protected float TargetDistance { get; private set; }
+    protected float TargetDistance { get; private set; } = 5;
 
     public bool NeedTransit { get; protected set; }
 
@@ -29,6 +29,6 @@ public abstract class Transition : MonoBehaviour
 
     private void OnEnable()
     {
-        NeedTransit = false;        
+        NeedTransit = false;
     }
 }

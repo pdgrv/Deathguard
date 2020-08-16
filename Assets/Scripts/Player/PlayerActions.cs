@@ -28,7 +28,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && _lastAttackTime <= 0)
         {
-            if (attackID == 1) //сократить этот момент
+            if (attackID == 1) //сократить
             {
                 if (attackJob != null) StopCoroutine(attackJob);
                 attackJob = StartCoroutine(Attack($"Attack{attackID}"));
@@ -64,9 +64,15 @@ public class PlayerActions : MonoBehaviour
         _animator.SetTrigger(attackNumber);
 
         yield return new WaitForSeconds(0.3f);
-        _hitbox.enabled = true; 
-        yield return new WaitForFixedUpdate();
-        _hitbox.enabled = false;
+        Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius); 
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.TryGetComponent(out Enemy enemy))
+            {
+                enemy.ApplyDamage(_player.TotalDamage);
+                Debug.Log(enemy.name + " получил пизды" + _player.TotalDamage);
+            }
+        }
 
         yield return new WaitForSeconds(0.75f);
         attackID = 1;

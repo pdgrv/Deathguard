@@ -8,28 +8,23 @@ public class PlayerHitbox : MonoBehaviour
 
     private SphereCollider _collider;
 
-    private Weapon _weapon;
-    private int _damage;
+    //private Weapon _weapon;
 
     private void Start()
     {
-        _weapon = GetComponentInParent<Weapon>();
+       // _weapon = GetComponentInParent<Weapon>();
         _collider = GetComponent<SphereCollider>();
-
-        _damage = _weapon.Damage;
 
         _collider.radius = _hitboxRadius;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
-        {
-            _damage = _weapon.Damage;
-
-            enemy.ApplyDamage(_damage);
-            Debug.Log(enemy.name + " получил пизды");
-        }
+        //if (other.TryGetComponent(out Enemy enemy))
+        //{
+        //    enemy.ApplyDamage(_weapon.Damage);
+        //    Debug.Log(enemy.name + " получил пизды");
+        //}
     }
 
     private void OnDrawGizmos()

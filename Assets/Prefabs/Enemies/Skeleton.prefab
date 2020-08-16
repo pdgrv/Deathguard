@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 50
-  _damage: 15
+  _damage: 20
   _expGived: 10
   _scoreGived: 0
 --- !u!114 &2444941740764200638
@@ -840,7 +840,7 @@ MonoBehaviour:
   _transitions:
   - {fileID: 2444941740764200636}
   - {fileID: 2444941741341084875}
-  _damage: 5
+  _damage: 20
   _attackDelay: 5
 --- !u!1 &2444941741341084874
 GameObject:

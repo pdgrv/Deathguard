@@ -35,16 +35,24 @@ public class AttackState : State
 
     private IEnumerator Attack()
     {
-        Animator.SetTrigger("Attack");
         var WaitForSplitSecond = new WaitForSeconds(0.9f);
 
-        yield return WaitForSplitSecond;
-        _hitbox.enabled = true;
-        yield return new WaitForFixedUpdate();
-        _hitbox.enabled = false;
+        Animator.ResetTrigger("ApplyDamage");
+        Animator.SetTrigger("Attack");
 
         yield return WaitForSplitSecond;
-        Animator.ResetTrigger("ApplyDamage");
+        
+        Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius);
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.TryGetComponent(out Player player))
+            {
+                player.ApplyDamage(_damage);
+                Debug.Log(player.name + " получил пизды" + _damage);
+            }
+        }
+
+        yield return WaitForSplitSecond;
         AttackJob = null;
     }
 
