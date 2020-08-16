@@ -52,7 +52,9 @@ public class Spawner : MonoBehaviour
     private void InstantiateEnemy()
     {
         Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-        Enemy enemy = Instantiate(_currentWave.Template, spawnPoint.transform).GetComponent<Enemy>();
+        GameObject template = _currentWave.Template[Random.Range(0, _currentWave.Template.Count)];
+
+        Enemy enemy = Instantiate(template, spawnPoint.transform).GetComponent<Enemy>();
         enemy.Init(_player);
     }
 
@@ -71,7 +73,7 @@ public class Spawner : MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public GameObject Template;
+    public List<GameObject> Template;
     public int Count;
     public float Delay;
 }
