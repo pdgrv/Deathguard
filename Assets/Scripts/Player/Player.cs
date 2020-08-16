@@ -8,8 +8,8 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 100;
-    [SerializeField] private int _maxExp = 15;
-    [SerializeField] private int _maxExpMultiplyer = 2;
+    [SerializeField] private int _needExp = 15;
+    [SerializeField] private int _needExpIncrease = 15;
     [SerializeField] private int _increaseHpOnLvlup = 10;
 
     private Armor _armor; // изменить все-таки на значения и events от armor weapon и в actions
@@ -31,24 +31,21 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _armor = GetComponent<Armor>();
         _weapon = GetComponent<Weapon>();
     }
 
     private void Start()
-    {
-        _armor = GetComponent<Armor>();
-        //_weapon = GetComponent<Weapon>();
-
+    {        
         _currentHealth = _maxHealth;
 
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
-        ExpChanged?.Invoke(_currentExp, _maxExp);
+        ExpChanged?.Invoke(_currentExp, _needExp);
         LevelChanged?.Invoke(_level);
     }
 
     private void OnEnable()
-    {
-       
+    {       
         _weapon.DamageChanged += OnDamageChanged;
     }
 
@@ -95,8 +92,8 @@ public class Player : MonoBehaviour
         _score += score;
 
         _currentExp += exp;
-        ExpChanged?.Invoke(_currentExp, _maxExp);
-        if (_currentExp >= _maxExp)
+        ExpChanged?.Invoke(_currentExp, _needExp);
+        if (_currentExp >= _needExp)
         {
             LevelUp();
         }
@@ -104,9 +101,9 @@ public class Player : MonoBehaviour
 
     private void LevelUp()
     {
-        _currentExp = _currentExp - _maxExp;
-        _maxExp *= _maxExpMultiplyer;
-        ExpChanged?.Invoke(_currentExp, _maxExp);
+        _currentExp = _currentExp - _needExp;
+        _needExp += _needExpIncrease;
+        ExpChanged?.Invoke(_currentExp, _needExp);
 
         _level++;
         LevelChanged?.Invoke(_level);

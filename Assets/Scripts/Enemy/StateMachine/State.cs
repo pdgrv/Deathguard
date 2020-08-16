@@ -12,11 +12,6 @@ public abstract class State : MonoBehaviour
     protected NavMeshAgent NavMesh { get; private set; }
     protected Player Target { get; private set; }
 
-    //private void Awake()
-    //{
-    //    Animator = GetComponent<Animator>();
-    //}
-
     public void Enter(Player target, Animator animator, NavMeshAgent navMesh)
     {
         if (enabled == false)
