@@ -6,14 +6,10 @@ public class AttackState : State
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _attackDelay = 2.5f;
+    [SerializeField] private float _attackRadius = 0.5f;
+    [SerializeField] private Transform _hitbox;
 
-    private SphereCollider _hitbox;
     public Coroutine AttackJob { get; private set; }
-
-    private void Start()
-    {
-        _hitbox = GetComponentInChildren<SphereCollider>();
-    }
 
     private float _lastAttackTime;
 
@@ -42,7 +38,7 @@ public class AttackState : State
 
         yield return WaitForSplitSecond;
         
-        Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius);
+        Collider[] hitColliders = Physics.OverlapSphere(_hitbox.position, _attackRadius);
         foreach (Collider hitCollider in hitColliders)
         {
             if (hitCollider.TryGetComponent(out Player player))
@@ -61,5 +57,11 @@ public class AttackState : State
         Vector3 direction = (Target.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, NavMesh.angularSpeed / 45 * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_hitbox.position, _attackRadius);
     }
 }
