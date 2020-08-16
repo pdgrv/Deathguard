@@ -7,13 +7,14 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<Wave> _waves;
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private Player _player;
-    [SerializeField] private float _waveDelay;
 
     private Wave _currentWave;
-    private int _currentWaveNumber = 0;
+    private int _currentWaveNumber;
+    private float _timeAfterLastWave;
+    private float _waveDelay = 10f;
+
     private float _timeAfterLastSpawn;
     private int _spawned;
-    private float _timeAfterLastWave;
 
     private void Start()
     {
@@ -21,16 +22,26 @@ public class Spawner : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
         if (_currentWave == null)
         {
             _timeAfterLastWave += Time.deltaTime;
 
-            if (_currentWaveNumber < _waves.Count - 1 && _timeAfterLastWave >= _waveDelay)
+            if (_currentWaveNumber < _waves.Count - 1)
             {
-                NextWave();
-                _timeAfterLastWave = 0;
+                if (_timeAfterLastWave >= _waveDelay)
+                {
+                    NextWave();
+                    _timeAfterLastWave = 0;
+                }
             }
+            else
+            {
+                //if all enemy killed
+                //levelcomplete
+                //
+            }
+
             return;
         }
 
@@ -68,12 +79,9 @@ public class Spawner : MonoBehaviour
         SetWave(++_currentWaveNumber);
         _spawned = 0;
     }
-}
 
-[System.Serializable]
-public class Wave
-{
-    public List<GameObject> Template;
-    public int Count;
-    public float Delay;
+    private void LevelComplete()
+    {
+
+    }
 }
