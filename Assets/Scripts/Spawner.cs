@@ -1,35 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private List<Wave> _waves;
+    [SerializeField] private List<Level> _levels;
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private Player _player;
 
+    public event UnityAction<int> LevelComplete;
+
+    private Level _currentLevel;
+    private int _currentLevelNumber;
+
+    private List<Wave> _waves;
     private Wave _currentWave;
     private int _currentWaveNumber;
     private float _timeAfterLastWave;
-    private float _waveDelay = 10f;
 
     private float _timeAfterLastSpawn;
     private int _spawned;
 
-    private void Start()
-    {
-        SetWave(_currentWaveNumber);
-    }
-
     private void Update()
     {        
-        if (_currentWave == null)
+        if (_currentWave == null) //если волна полностью заспавнилась
         {
             _timeAfterLastWave += Time.deltaTime;
 
             if (_currentWaveNumber < _waves.Count - 1)
             {
-                if (_timeAfterLastWave >= _waveDelay)
+                if (_timeAfterLastWave >= _currentLevel.WaveDelay)
                 {
                     NextWave();
                     _timeAfterLastWave = 0;
@@ -80,8 +81,35 @@ public class Spawner : MonoBehaviour
         _spawned = 0;
     }
 
-    private void LevelComplete()
+    private void SetLevel(int index)
     {
-
+        _currentLevel = _levels[index];
+        _waves = _currentLevel.Waves;
     }
+
+    public void NextLevel()
+    {
+        SetLevel(_currentLevelNumber);
+    }
+
+    public void StartLevel()
+    {
+        _waves = _currentLevel.Waves;
+        SetWave(0);
+    }
+}
+
+[System.Serializable]
+public class Level
+{
+    public List<Wave> Waves;
+    public float WaveDelay;
+}
+
+[System.Serializable]
+public class Wave
+{
+    public List<GameObject> Template;
+    public int Count;
+    public float Delay;
 }

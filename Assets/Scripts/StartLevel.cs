@@ -4,26 +4,55 @@ using UnityEngine;
 
 public class StartLevel : MonoBehaviour
 {
-    [SerializeField] private GameObject LeftDoor;
-    [SerializeField] private GameObject RightDoor;
+    [SerializeField] private GameObject _leftDoor;
+    [SerializeField] private GameObject _rightDoor;
+    [SerializeField] private Spawner _spawner;
 
+    private bool _canStartLevel = true;
+        
     private IEnumerator CloseDoor()
     {
         Quaternion targetRotation = Quaternion.Euler(-90, 0, 0);
 
-        while (Quaternion.Angle(LeftDoor.transform.rotation, targetRotation) > 1f)
+        while (Quaternion.Angle(_leftDoor.transform.rotation, targetRotation) > 1f)
         {
-            LeftDoor.transform.Rotate(Vector3.forward, 100f * Time.deltaTime);
-            RightDoor.transform.Rotate(Vector3.back, 100f * Time.deltaTime);
+            _leftDoor.transform.Rotate(Vector3.forward, 100f * Time.deltaTime);
+            _rightDoor.transform.Rotate(Vector3.back, 100f * Time.deltaTime);
             yield return null;
         }
     }
 
+    private IEnumerator OpenDoor()
+    {
+        Quaternion targetRotation = Quaternion.Euler(-90, 0, -75);
+
+        while (Quaternion.Angle(_leftDoor.transform.rotation, targetRotation) > 1f)
+        {
+            _leftDoor.transform.Rotate(Vector3.back, 100f * Time.deltaTime);
+            _rightDoor.transform.Rotate(Vector3.forward, 100f * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    private void BeginLevel()
+    {
+        _canStartLevel = false;
+        StartCoroutine(CloseDoor());
+
+        _spawner.StartLevel();
+    }
+
+    public void EndLevel()
+    {
+        _canStartLevel = true;
+        StartCoroutine(OpenDoor());
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (_canStartLevel && other.TryGetComponent(out Player player))
         {
-            StartCoroutine(CloseDoor());
+            BeginLevel();
         }
     }
 }
