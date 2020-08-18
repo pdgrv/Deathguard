@@ -8,6 +8,8 @@ public class LevelStage : MonoBehaviour
     [SerializeField] private GameObject _rightDoor;
     [SerializeField] private Spawner _spawner;
 
+    [SerializeField] private Light _dayLight;
+    [SerializeField] private float _lightChangeSpeed;
     [SerializeField] private ParticleSystem _startingParticle;
 
     private void OnEnable()
@@ -21,7 +23,7 @@ public class LevelStage : MonoBehaviour
     }
 
     private bool _canStartLevel = true;
-        
+
     private IEnumerator CloseDoor()
     {
         Quaternion targetRotation = Quaternion.Euler(-90, 0, 0);
@@ -46,10 +48,20 @@ public class LevelStage : MonoBehaviour
         }
     }
 
+    private IEnumerator LightChanger(float targetIntensity)
+    {
+        while (Mathf.Abs(_dayLight.intensity - targetIntensity) > 0.001f)
+        {
+            _dayLight.intensity = Mathf.Lerp(_dayLight.intensity, targetIntensity, _lightChangeSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
     private void BeginLevel()
     {
         _canStartLevel = false;
         StartCoroutine(CloseDoor());
+        StartCoroutine(LightChanger(0f));
         _startingParticle.Pause();
 
         _spawner.StartLevel();
@@ -58,17 +70,18 @@ public class LevelStage : MonoBehaviour
     private void OnLevelComplete(int level)
     {
         LevelComplete();
-    }   
+    }
 
     private void LevelComplete()
-    {        
+    {
         StartCoroutine(OpenDoor());
+        StartCoroutine(LightChanger(1.2f));
     }
 
     public void ExitLevel()
     {
         _canStartLevel = true;
-        _startingParticle.Play();    
+        _startingParticle.Play();
     }
 
     private void OnTriggerEnter(Collider other)
