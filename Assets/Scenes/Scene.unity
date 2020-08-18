@@ -15,12 +15,12 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.06666667, g: 0.17254902, b: 0.29411766, a: 1}
+  m_FogColor: {r: 0.13883945, g: 0.28500757, b: 0.4528302, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.03
+  m_FogDensity: 0.02
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.3432836, g: 0.3432836, b: 0.3432836, a: 1}
+  m_AmbientSkyColor: {r: 0.43137255, g: 0.43137255, b: 0.43137255, a: 1}
   m_AmbientEquatorColor: {r: 0.3432836, g: 0.3432836, b: 0.3432836, a: 1}
   m_AmbientGroundColor: {r: 0.3432836, g: 0.3432836, b: 0.3432836, a: 1}
   m_AmbientIntensity: 1
@@ -57,7 +57,7 @@ LightmapSettings:
     serializedVersion: 12
     m_Resolution: 1
     m_BakeResolution: 100
-    m_AtlasSize: 1024
+    m_AtlasSize: 512
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 0
@@ -17697,7 +17697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae97114e80f3ba64483c8e83154e9bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
+  _speed: 5
   _rotationSpeed: 12
   _jumpSpeed: 12
   _gravityModifier: 3.5
@@ -17789,7 +17789,7 @@ Transform:
   m_GameObject: {fileID: 729033651}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.03, y: 0, z: -37.47}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 54662446}
   - {fileID: 1528216482}
@@ -42638,7 +42638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -42707,7 +42707,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1705443035}
-    characterCount: 4
+    characterCount: 1
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -55384,13 +55384,14 @@ GameObject:
   - component: {fileID: 1998962907}
   - component: {fileID: 1998962909}
   - component: {fileID: 1998962908}
+  - component: {fileID: 1998962910}
   m_Layer: 5
   m_Name: PlayerMoney
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1998962907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55408,7 +55409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -122.9, y: -46}
+  m_AnchoredPosition: {x: -109.6, y: -69.9}
   m_SizeDelta: {x: 49.143036, y: 49.143036}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1998962908
@@ -55448,6 +55449,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998962906}
   m_CullTransparentMesh: 0
+--- !u!114 &1998962910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998962906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2308e7571fe3798468f765d4c1efe631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 1705443035}
+  _player: {fileID: 729033655}
 --- !u!1 &1999977312
 GameObject:
   m_ObjectHideFlags: 0
