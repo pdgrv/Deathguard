@@ -56,7 +56,7 @@ public class Spawner : MonoBehaviour
                 if (_levelNumber + 1 < _levels.Count)
                     SetLevel(++_levelNumber);
                 else
-                    Debug.Log("Все уровни пройдены!");
+                    Debug.Log("Все уровни пройдены!"); //или сюда
             }
             return;
         }
@@ -110,6 +110,7 @@ public class Spawner : MonoBehaviour
 
     public void StartLevel()
     {
+        //тут нужно ограничить чтобы последний уровень не переигрывался и сделать конец-демо-окошко)
         SetWave(0);
         _isStopSpawn = false;
     }

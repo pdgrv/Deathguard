@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private int _expGived;
-    [SerializeField] private int _moneyGived;
+    [SerializeField] private int _moneyGived; // сделать рандом
 
     private Animator _animator;
     private CharacterController _controller;

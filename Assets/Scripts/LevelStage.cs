@@ -12,6 +12,9 @@ public class LevelStage : MonoBehaviour
     [SerializeField] private float _lightChangeSpeed;
     [SerializeField] private ParticleSystem _startingParticle;
 
+    [SerializeField] private List<AudioSource> _creepySounds;
+    [SerializeField] private List<AudioSource> _peaceSounds;
+
     private void OnEnable()
     {
         _spawner.LevelComplete += OnLevelComplete;
@@ -30,8 +33,8 @@ public class LevelStage : MonoBehaviour
 
         while (Quaternion.Angle(_leftDoor.transform.rotation, targetRotation) > 1f)
         {
-            _leftDoor.transform.Rotate(Vector3.forward, 100f * Time.deltaTime);
-            _rightDoor.transform.Rotate(Vector3.back, 100f * Time.deltaTime);
+            _leftDoor.transform.Rotate(Vector3.forward, 50f * Time.deltaTime);
+            _rightDoor.transform.Rotate(Vector3.back, 50f * Time.deltaTime);
             yield return null;
         }
     }
@@ -42,8 +45,8 @@ public class LevelStage : MonoBehaviour
 
         while (Quaternion.Angle(_leftDoor.transform.rotation, targetRotation) > 1f)
         {
-            _leftDoor.transform.Rotate(Vector3.back, 100f * Time.deltaTime);
-            _rightDoor.transform.Rotate(Vector3.forward, 100f * Time.deltaTime);
+            _leftDoor.transform.Rotate(Vector3.back, 50f * Time.deltaTime);
+            _rightDoor.transform.Rotate(Vector3.forward, 50f * Time.deltaTime);
             yield return null;
         }
     }
@@ -57,11 +60,26 @@ public class LevelStage : MonoBehaviour
         }
     }
 
+    private void PlayStageSounds(List<AudioSource> soundsOn, List<AudioSource> soundsOff)
+    {
+        foreach (AudioSource sound in soundsOn)
+        {
+            sound.Play();
+        }
+        foreach (AudioSource sound in soundsOff)
+        {
+            sound.Stop();   
+        }
+    }
+
     private void BeginLevel()
     {
         _canStartLevel = false;
         StartCoroutine(CloseDoor());
         StartCoroutine(LightChanger(0f));
+
+        PlayStageSounds(_creepySounds, _peaceSounds);
+
         _startingParticle.Pause();
 
         _spawner.StartLevel();
@@ -76,6 +94,8 @@ public class LevelStage : MonoBehaviour
     {
         StartCoroutine(OpenDoor());
         StartCoroutine(LightChanger(1.2f));
+
+        PlayStageSounds(_peaceSounds, _creepySounds);
     }
 
     public void ExitLevel()
