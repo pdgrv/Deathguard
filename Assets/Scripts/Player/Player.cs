@@ -18,13 +18,14 @@ public class Player : MonoBehaviour
     private int _currentHealth;
     private int _level = 1;
     private int _currentExp = 0;
-    private int _score;
+    private int _money;
 
-    private bool _hasKey;
+    private bool _hasKey; // убрать
 
     public event UnityAction<int, int> HealthChanged;
     public event UnityAction<int, int> ExpChanged;
     public event UnityAction<int> LevelChanged;
+    public event UnityAction<int> MoneyChanged;
 
     public int TotalDamage { get; private set; }
     public bool IsAlive = true;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
         ExpChanged?.Invoke(_currentExp, _needExp);
         LevelChanged?.Invoke(_level);
+        MoneyChanged?.Invoke(_money);
     }
 
     private void OnEnable()
@@ -87,9 +89,10 @@ public class Player : MonoBehaviour
         IsAlive = false;
     }
 
-    public void AddReward(int exp, int score)
+    public void AddReward(int exp, int money)
     {
-        _score += score;
+        _money += money;
+        MoneyChanged?.Invoke(_money);
 
         _currentExp += exp;
         ExpChanged?.Invoke(_currentExp, _needExp);

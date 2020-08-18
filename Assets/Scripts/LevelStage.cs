@@ -2,11 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartLevel : MonoBehaviour
+public class LevelStage : MonoBehaviour
 {
     [SerializeField] private GameObject _leftDoor;
     [SerializeField] private GameObject _rightDoor;
     [SerializeField] private Spawner _spawner;
+
+    [SerializeField] private ParticleSystem _startingParticle;
+
+    private void OnEnable()
+    {
+        _spawner.LevelComplete += OnLevelComplete;
+    }
+
+    private void OnDisable()
+    {
+        _spawner.LevelComplete -= OnLevelComplete;
+    }
 
     private bool _canStartLevel = true;
         
@@ -38,14 +50,25 @@ public class StartLevel : MonoBehaviour
     {
         _canStartLevel = false;
         StartCoroutine(CloseDoor());
+        _startingParticle.Pause();
 
         _spawner.StartLevel();
     }
 
-    public void EndLevel()
+    private void OnLevelComplete(int level)
+    {
+        LevelComplete();
+    }   
+
+    private void LevelComplete()
+    {        
+        StartCoroutine(OpenDoor());
+    }
+
+    public void ExitLevel()
     {
         _canStartLevel = true;
-        StartCoroutine(OpenDoor());
+        _startingParticle.Play();    
     }
 
     private void OnTriggerEnter(Collider other)

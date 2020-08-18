@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator),typeof(Player))]
+[RequireComponent(typeof(Animator), typeof(Player))]
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] private float _attackDelay = 0.45f;
@@ -28,18 +28,10 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && _lastAttackTime <= 0)
         {
-            if (attackID == 1) //сократить
-            {
-                if (attackJob != null) StopCoroutine(attackJob);
-                attackJob = StartCoroutine(Attack($"Attack{attackID}"));
-                attackID = 2;
-            }
-            else if (attackID == 2)
-            {
-                if (attackJob != null) StopCoroutine(attackJob);
-                attackJob = StartCoroutine(Attack($"Attack{attackID}"));
-                attackID = 1;
-            }
+            if (attackJob != null) StopCoroutine(attackJob);
+            attackJob = StartCoroutine(Attack($"Attack{attackID}"));
+
+            attackID = attackID == 1 ? 2 : 1;
 
             _lastAttackTime = _attackDelay;
         }
@@ -64,7 +56,7 @@ public class PlayerActions : MonoBehaviour
         _animator.SetTrigger(attackNumber);
 
         yield return new WaitForSeconds(0.3f);
-        Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius); 
+        Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius);
         foreach (Collider hitCollider in hitColliders)
         {
             if (hitCollider.TryGetComponent(out Enemy enemy))

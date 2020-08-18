@@ -741,7 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 50
   _expGived: 10
-  _scoreGived: 0
+  _moneyGived: 2
 --- !u!114 &2444941740764200638
 MonoBehaviour:
   m_ObjectHideFlags: 0

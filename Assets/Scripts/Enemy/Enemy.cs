@@ -8,12 +8,17 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private int _expGived;
-    [SerializeField] private int _scoreGived;
+    [SerializeField] private int _moneyGived;
 
     private Animator _animator;
     private CharacterController _controller;
 
+    public int Exp => _expGived;
+    public int Money => _moneyGived;
+
     public Player Target { get; private set; }
+
+    public event UnityAction<Enemy> Dying;
 
     private void Start()
     {
@@ -38,7 +43,8 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("Die");
         Debug.Log(transform.name + "Die...");
 
-        Target.AddReward(_expGived, _scoreGived);
+        Dying?.Invoke(this);
+        Destroy(gameObject, 2f);
     }
 
     public void Init(Player target)
