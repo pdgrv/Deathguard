@@ -840,7 +840,7 @@ MonoBehaviour:
   - {fileID: 2444941740764200636}
   - {fileID: 2444941741341084875}
   _damage: 20
-  _attackDelay: 5
+  _attackDelay: 3
   _attackRadius: 0.6
   _hitbox: {fileID: 2444941741678643940}
 --- !u!1 &2444941741341084874
