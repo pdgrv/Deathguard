@@ -61,7 +61,7 @@ public class AttackState : State
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_hitbox.position, _attackRadius);
     }
 }

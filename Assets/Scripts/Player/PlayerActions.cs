@@ -6,10 +6,12 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] private float _attackDelay = 0.45f;
+    [SerializeField] private Transform _attackPoint;
+    [SerializeField] private float _attackRadius;
 
     private Player _player;
     private Animator _animator;
-    private SphereCollider _hitbox;
+    private SphereCollider _actionbox;
 
     private Coroutine attackJob;
     private int attackID = 1;
@@ -20,8 +22,7 @@ public class PlayerActions : MonoBehaviour
         _player = GetComponent<Player>();
         _animator = GetComponent<Animator>();
 
-        _hitbox = GetComponentInChildren<SphereCollider>();
-        _hitbox.enabled = false;
+        _actionbox = GetComponentInChildren<SphereCollider>();
     }
 
     private void Update()
@@ -40,23 +41,16 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetButtonDown("Fire3"))
         {
-            Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius, 1 << 11); //так не получится сделать подсветку 
-            foreach (Collider hitCollider in hitColliders)                                                        //при возможности активации.
-            {
-                if (hitCollider.TryGetComponent(out InteractableObject usedObject))
-                {
-                    usedObject.Activate(_player);
-                }
-            }
+            Interact();
         }
     }
 
-    private IEnumerator Attack(string attackNumber) //переделать на physics.overlap
+    private IEnumerator Attack(string attackNumber)
     {
         _animator.SetTrigger(attackNumber);
 
         yield return new WaitForSeconds(0.3f);
-        Collider[] hitColliders = Physics.OverlapSphere(_hitbox.transform.position, _hitbox.radius);
+        Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _actionbox.radius);
         foreach (Collider hitCollider in hitColliders)
         {
             if (hitCollider.TryGetComponent(out Enemy enemy))
@@ -69,5 +63,23 @@ public class PlayerActions : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         attackID = 1;
         _animator.ResetTrigger(attackNumber);
+    }
+
+    private void Interact()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(_actionbox.transform.position, _actionbox.radius, 1 << 11);
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.TryGetComponent(out InteractableObject usedObject))
+            {
+                usedObject.Activate(_player);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_attackPoint.position, _attackRadius);
     }
 }

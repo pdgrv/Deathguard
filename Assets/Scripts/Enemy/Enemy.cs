@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("ApplyDamage");
     }
 
-    private void Die()//доделать, нужно остановить state machine 
+    private void Die()
     {
         _controller.enabled = false;
 
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(transform.name + "Die...");
 
         Dying?.Invoke(this);
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1.9f);
     }
 
     public void Init(Player target)
