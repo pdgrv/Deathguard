@@ -6263,22 +6263,40 @@ MonoBehaviour:
     - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
         type: 3}
       Count: 2
-      Delay: 3
+      Delay: 2
     - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
         type: 3}
-      Count: 2
-      Delay: 3
-    WaveDelay: 7
+      Count: 3
+      Delay: 1.5
+    WaveDelay: 4
   - Waves:
     - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
         type: 3}
       Count: 2
-      Delay: 3
+      Delay: 0.5
     - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
         type: 3}
       Count: 2
-      Delay: 3
-    WaveDelay: 5
+      Delay: 0.5
+    - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
+        type: 3}
+      Count: 4
+      Delay: 1
+    WaveDelay: 2
+  - Waves:
+    - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
+        type: 3}
+      Count: 3
+      Delay: 2
+    - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
+        type: 3}
+      Count: 3
+      Delay: 2
+    - Template: {fileID: 2444941741341084872, guid: 826e8446eddafdb4b9307e46eb2102e9,
+        type: 3}
+      Count: 6
+      Delay: 1
+    WaveDelay: 1
 --- !u!4 &235391813
 Transform:
   m_ObjectHideFlags: 0
@@ -46593,8 +46611,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8773585, g: 0.8261673, b: 0.59180313, a: 1}
-  m_Intensity: 2
-  m_Range: 7
+  m_Intensity: 1.6
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

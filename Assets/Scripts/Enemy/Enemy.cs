@@ -44,11 +44,24 @@ public class Enemy : MonoBehaviour
         Debug.Log(transform.name + "Die...");
 
         Dying?.Invoke(this);
-        Destroy(gameObject, 1.9f);
+
+        DestroyComponents<State>();
+        DestroyComponents<Transition>();
+
+        Destroy(gameObject, 3f);
     }
 
     public void Init(Player target)
     {
         Target = target;
+    }
+
+    private void DestroyComponents<T>() where T : MonoBehaviour
+    {
+        T[] components = GetComponents<T>();
+        foreach (T component in components)
+        {
+            Destroy(component);
+        }
     }
 }

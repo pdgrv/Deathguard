@@ -8,7 +8,7 @@ public class MoveTransition : Transition
 
     private void Update()
     {
-        _isAttackNow = GetComponent<AttackState>().AttackJob != null;
+        _isAttackNow = GetComponent<AttackState>().AttackJob != null; //hz norm ili ne norm
 
         if (TargetDistance > NavMesh.stoppingDistance && !_isAttackNow && Target.IsAlive)
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,15 +30,22 @@ public class AttackState : State
         _lastAttackTime -= Time.deltaTime;
     }
 
+    private void FaceTarget()
+    {
+        Vector3 direction = (Target.transform.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, NavMesh.angularSpeed / 45 * Time.deltaTime);
+    }
+
     private IEnumerator Attack()
     {
-        var WaitForSplitSecond = new WaitForSeconds(0.9f);
+        var WaitForSplitSecond = new WaitForSeconds(0.95f);
 
         Animator.ResetTrigger("ApplyDamage");
         Animator.SetTrigger("Attack");
 
         yield return WaitForSplitSecond;
-        
+
         Collider[] hitColliders = Physics.OverlapSphere(_hitbox.position, _attackRadius);
         foreach (Collider hitCollider in hitColliders)
         {
@@ -50,13 +58,6 @@ public class AttackState : State
 
         yield return WaitForSplitSecond;
         AttackJob = null;
-    }
-
-    private void FaceTarget()
-    {
-        Vector3 direction = (Target.transform.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, NavMesh.angularSpeed / 45 * Time.deltaTime);
     }
 
     private void OnDrawGizmos()
