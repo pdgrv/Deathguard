@@ -6,7 +6,7 @@ public class SpeedAltar : InteractableObject
 {
     [SerializeField] private float _speedMultiplier = 1.1f;
 
-    protected override void Use(Player player)
+    protected override void Activate(Player player)
     {
         player.GetComponent<CharacterMovement>().IncreaseSpeed(_speedMultiplier);
     }

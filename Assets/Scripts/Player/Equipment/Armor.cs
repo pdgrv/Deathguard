@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Armor : MonoBehaviour
 {
-    [SerializeField] private int _armorGive = 3;
+    [SerializeField] private int _startingArmor = 3;
 
     private SetCharacter _setCharacter;
 
@@ -27,10 +27,10 @@ public class Armor : MonoBehaviour
             }
         }
 
-        ChangeArmorStats();
+        ChangeArmorStats(_startingArmor);
     }
 
-    public void IncreaseTier()
+    public bool IncreaseTier(int armorGive)
     {
         _setCharacter.RemoveItem(_setCharacter.itemGroups[0], _armorTier);
         _setCharacter.RemoveItem(_setCharacter.itemGroups[1], _armorTier);
@@ -38,17 +38,18 @@ public class Armor : MonoBehaviour
         if (_armorTier < 3)
             _armorTier++;
         else
-            _armorTier = 0; // изменить на условие 
+            return false;
 
         _setCharacter.AddItem(_setCharacter.itemGroups[0], _armorTier);
         _setCharacter.AddItem(_setCharacter.itemGroups[1], _armorTier);
 
-        ChangeArmorStats();
+        ChangeArmorStats(armorGive);
+        return true;
     }
 
-    private void ChangeArmorStats()
+    private void ChangeArmorStats(int armorGive)
     {
-        Value = _armorGive * _armorTier;
+        Value += armorGive;
 
         ArmorChanged?.Invoke(Value);
     }

@@ -11,7 +11,7 @@ public class PlayerActions : MonoBehaviour
 
     private Player _player;
     private Animator _animator;
-    private SphereCollider _actionbox;
+    private PlayerInteractionBox _interactionBox;
 
     private Coroutine attackJob;
     private int attackID = 1;
@@ -22,7 +22,7 @@ public class PlayerActions : MonoBehaviour
         _player = GetComponent<Player>();
         _animator = GetComponent<Animator>();
 
-        _actionbox = GetComponentInChildren<SphereCollider>();
+        _interactionBox = GetComponentInChildren<PlayerInteractionBox>();
     }
 
     private void Update()
@@ -41,7 +41,7 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetButtonDown("Fire3"))
         {
-            Interact();
+            Use();
         }
     }
 
@@ -50,7 +50,7 @@ public class PlayerActions : MonoBehaviour
         _animator.SetTrigger(attackNumber);
 
         yield return new WaitForSeconds(0.3f);
-        Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _actionbox.radius);
+        Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _attackRadius);
         foreach (Collider hitCollider in hitColliders)
         {
             if (hitCollider.TryGetComponent(out Enemy enemy))
@@ -60,21 +60,24 @@ public class PlayerActions : MonoBehaviour
             }
         }
 
+        _animator.ResetTrigger(attackNumber);
         yield return new WaitForSeconds(0.75f);
         attackID = 1;
-        _animator.ResetTrigger(attackNumber);
+        attackJob = null;
     }
 
-    private void Interact()
+    private void Use()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(_actionbox.transform.position, _actionbox.radius, 1 << 11);
-        foreach (Collider hitCollider in hitColliders)
-        {
-            if (hitCollider.TryGetComponent(out InteractableObject usedObject))
-            {
-                usedObject.Activate(_player);
-            }
-        }
+        //Collider[] hitColliders = Physics.OverlapSphere(_actionbox.transform.position, _actionbox.radius, 1 << 11);
+        //foreach (Collider hitCollider in hitColliders)
+        //{
+        //    if (hitCollider.TryGetComponent(out InteractableObject usedObject))
+        //    {
+        //        usedObject.Activate(_player);
+        //    }
+        //}
+
+        _interactionBox.Use(_player);
     }
 
     private void OnDrawGizmos()

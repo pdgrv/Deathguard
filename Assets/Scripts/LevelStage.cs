@@ -68,7 +68,7 @@ public class LevelStage : MonoBehaviour
         }
         foreach (AudioSource sound in soundsOff)
         {
-            sound.Stop();   
+            sound.Stop();
         }
     }
 
@@ -85,17 +85,17 @@ public class LevelStage : MonoBehaviour
         _spawner.StartLevel();
     }
 
-    private void OnLevelComplete(int level)
-    {
-        LevelComplete();
-    }
-
-    private void LevelComplete()
+    private void LevelComplete(int levelNumber)
     {
         StartCoroutine(OpenDoor());
         StartCoroutine(LightChanger(1.2f));
 
         PlayStageSounds(_peaceSounds, _creepySounds);
+    }
+
+    private void OnLevelComplete(int levelNumber)
+    {
+        LevelComplete(levelNumber);
     }
 
     public void ExitLevel()
@@ -110,5 +110,8 @@ public class LevelStage : MonoBehaviour
         {
             BeginLevel();
         }
-    }
+    }//можно сделать абстрактный компонент с этим скриптом, а местный ontriggerenter вьебать на отдельный триггер начала уровня.
 }
+
+//так же можно отделить всякие свистоперделки и сделать эвент вначале/вконце уровня подрубающий их и UI
+//+перенести эвент начала уровня со спавнера сюда

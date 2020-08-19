@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     private int _currentExp = 0;
     private int _money;
 
-    private bool _hasKey; // убрать
-
     public event UnityAction<int, int> HealthChanged;
     public event UnityAction<int, int> ExpChanged;
     public event UnityAction<int> LevelChanged;
@@ -37,7 +35,7 @@ public class Player : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
         _currentHealth = _maxHealth;
 
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
@@ -47,7 +45,7 @@ public class Player : MonoBehaviour
     }
 
     private void OnEnable()
-    {       
+    {
         _weapon.DamageChanged += OnDamageChanged;
     }
 
@@ -102,6 +100,23 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool EnoughMoney(int cost)
+    {
+        bool IsBuy;
+        if (_money >= cost)
+        {
+            _money -= cost;
+            IsBuy = true;
+        }
+        else
+        {
+            IsBuy = false;
+        }
+
+        MoneyChanged?.Invoke(_money);
+        return IsBuy;
+    }
+
     private void LevelUp()
     {
         _currentExp = _currentExp - _needExp;
@@ -114,10 +129,5 @@ public class Player : MonoBehaviour
         _maxHealth += _increaseHpOnLvlup;
         _currentHealth += _increaseHpOnLvlup;
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
-    }
-
-    public void FindKey()
-    {
-        _hasKey = true;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController), typeof(Animator))]
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed = 4.0f;
+    [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _rotationSpeed = 12f;
     [SerializeField] private float _jumpSpeed = 12f;
     [SerializeField] private float _gravityModifier = 3.5f;
