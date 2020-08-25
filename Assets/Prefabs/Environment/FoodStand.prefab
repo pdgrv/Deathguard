@@ -125,4 +125,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cost: 5
   _costIncrease: 2
+  _costLabel: {fileID: 0}
   _healValue: 50

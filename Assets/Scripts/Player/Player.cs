@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private int _currentHealth;
     private int _level = 1;
     private int _currentExp = 0;
-    private int _money;
+    public int _money;//паблик для тестов
 
     public event UnityAction<int, int> HealthChanged;
     public event UnityAction<int, int> ExpChanged;
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool EnoughMoney(int cost)
+    public bool BuyItem(int cost)
     {
         bool IsBuy;
         if (_money >= cost)

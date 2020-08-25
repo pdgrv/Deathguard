@@ -5,21 +5,29 @@ using UnityEngine.Events;
 
 public class ArmorStand : Shop
 {
-    [SerializeField] private int _armor;
-    [SerializeField] private int _armorIncrease;
+    [SerializeField] private List<GameObject> _armors;
 
-    protected override bool BuyItem(Player player)
+    private int _currentArmor;
+
+    protected override void SellItem(Player player)
     {
-        Armor playerArmor = player.GetComponent<Armor>();
-        if (playerArmor.IncreaseTier(_armor))
-            return true;
-        else
-            return false;
+        if (_currentArmor < _armors.Count)
+        {
+            Armor playerArmor = player.GetComponent<Armor>();
+            playerArmor.IncreaseTier(_stat);
+            _currentArmor++;
+        }
+        if (_currentArmor >= _armors.Count)
+            Destroy(gameObject);
     }
 
     protected override void UpdateItem()
     {
         base.UpdateItem();
-        _armor += _armorIncrease;
+
+        foreach (GameObject armor in _armors)
+            armor.SetActive(false);
+        if (_currentArmor <= _armors.Count - 1)
+            _armors[_currentArmor].SetActive(true);
     }
 }

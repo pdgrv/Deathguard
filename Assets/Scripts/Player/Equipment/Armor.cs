@@ -30,21 +30,19 @@ public class Armor : MonoBehaviour
         ChangeArmorStats(_startingArmor);
     }
 
-    public bool IncreaseTier(int armorGive)
+    public void IncreaseTier(int armorGive)
     {
+        if (_armorTier >= 3)
+            return;
         _setCharacter.RemoveItem(_setCharacter.itemGroups[0], _armorTier);
         _setCharacter.RemoveItem(_setCharacter.itemGroups[1], _armorTier);
 
-        if (_armorTier < 3)
-            _armorTier++;
-        else
-            return false;
+        _armorTier++;
 
         _setCharacter.AddItem(_setCharacter.itemGroups[0], _armorTier);
         _setCharacter.AddItem(_setCharacter.itemGroups[1], _armorTier);
 
         ChangeArmorStats(armorGive);
-        return true;
     }
 
     private void ChangeArmorStats(int armorGive)

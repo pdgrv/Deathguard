@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class MoveTransition : Transition
 {
+    private AttackState _attackState;
     private bool _isAttackNow;
+
+    private void Start()
+    {
+        _attackState = GetComponent<AttackState>();
+    }
 
     private void Update()
     {
-        _isAttackNow = GetComponent<AttackState>().AttackJob != null; //hz norm ili ne norm
-
-        if (TargetDistance > NavMesh.stoppingDistance && !_isAttackNow && Target.IsAlive)
+        if (TargetDistance > NavMesh.stoppingDistance && !_attackState.IsAttack && Target.IsAlive)
         {
             NeedTransit = true;
         }

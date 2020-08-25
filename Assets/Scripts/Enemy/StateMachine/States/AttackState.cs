@@ -10,7 +10,9 @@ public class AttackState : State
     [SerializeField] private float _attackRadius = 0.5f;
     [SerializeField] private Transform _hitbox;
 
-    public Coroutine AttackJob { get; private set; }
+    private Coroutine AttackJob;
+
+    public bool IsAttack { get; private set; }
 
     private float _lastAttackTime;
 
@@ -44,6 +46,8 @@ public class AttackState : State
         Animator.ResetTrigger("ApplyDamage");
         Animator.SetTrigger("Attack");
 
+        IsAttack = true;
+
         yield return WaitForSplitSecond;
 
         Collider[] hitColliders = Physics.OverlapSphere(_hitbox.position, _attackRadius);
@@ -57,6 +61,7 @@ public class AttackState : State
         }
 
         yield return WaitForSplitSecond;
+        IsAttack = false;
         AttackJob = null;
     }
 

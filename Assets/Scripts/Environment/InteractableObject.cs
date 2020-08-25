@@ -7,7 +7,7 @@ public abstract class InteractableObject : MonoBehaviour
     private Vector3 _defaultScale;
     protected bool _isUsed = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         gameObject.layer = 11;
         _defaultScale = transform.localScale;

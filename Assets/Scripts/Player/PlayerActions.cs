@@ -16,6 +16,7 @@ public class PlayerActions : MonoBehaviour
     private Coroutine attackJob;
     private int attackID = 1;
     private float _lastAttackTime;
+    public bool IsAttack { get; private set; }
 
     private void Start()
     {
@@ -48,8 +49,10 @@ public class PlayerActions : MonoBehaviour
     private IEnumerator Attack(string attackNumber)
     {
         _animator.SetTrigger(attackNumber);
+        IsAttack = true;
+        var WaitForSplitSecond = new WaitForSeconds(0.3f);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return WaitForSplitSecond;
         Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _attackRadius);
         foreach (Collider hitCollider in hitColliders)
         {
@@ -61,7 +64,9 @@ public class PlayerActions : MonoBehaviour
         }
 
         _animator.ResetTrigger(attackNumber);
-        yield return new WaitForSeconds(0.75f);
+
+        yield return new WaitForSeconds(0.5f);
+        IsAttack = false;
         attackID = 1;
         attackJob = null;
     }
