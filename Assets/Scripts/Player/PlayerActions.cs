@@ -48,9 +48,11 @@ public class PlayerActions : MonoBehaviour
 
     private IEnumerator Attack(string attackNumber)
     {
+        var WaitForSplitSecond = new WaitForSeconds(0.3f);
+
         _animator.SetTrigger(attackNumber);
         IsAttack = true;
-        var WaitForSplitSecond = new WaitForSeconds(0.3f);
+        _player.Audio.PlaySound("Swing");
 
         yield return WaitForSplitSecond;
         Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _attackRadius);
@@ -73,16 +75,8 @@ public class PlayerActions : MonoBehaviour
 
     private void Use()
     {
-        //Collider[] hitColliders = Physics.OverlapSphere(_actionbox.transform.position, _actionbox.radius, 1 << 11);
-        //foreach (Collider hitCollider in hitColliders)
-        //{
-        //    if (hitCollider.TryGetComponent(out InteractableObject usedObject))
-        //    {
-        //        usedObject.Activate(_player);
-        //    }
-        //}
-
-        _interactionBox.Use(_player);
+        if (_interactionBox.Use(_player))
+            _player.Audio.PlaySound("Use");
     }
 
     private void OnDrawGizmos()

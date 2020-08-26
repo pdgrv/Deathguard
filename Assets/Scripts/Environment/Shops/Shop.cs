@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 public abstract class Shop : InteractableObject
-{    
+{
     [SerializeField] protected int _stat;
     [SerializeField] private int _statIncrease;
     [SerializeField] private int _cost;

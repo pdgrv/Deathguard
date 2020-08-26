@@ -28,10 +28,14 @@ public class Player : MonoBehaviour
     public int TotalDamage { get; private set; }
     public bool IsAlive = true;
 
+    public PlayerAudio Audio { get; private set; }
+
     private void Awake()
     {
         _armor = GetComponent<Armor>();
         _weapon = GetComponent<Weapon>();
+
+        Audio = GetComponent<PlayerAudio>();
     }
 
     private void Start()
@@ -67,6 +71,8 @@ public class Player : MonoBehaviour
         _currentHealth -= damage;
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
 
+        Audio.PlaySound("ApplyDamage");
+
         if (_currentHealth <= 0)
         {
             Die();
@@ -84,6 +90,7 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("вы проиграли.");
+        Audio.PlaySound("Die");
         IsAlive = false;
     }
 
@@ -125,6 +132,7 @@ public class Player : MonoBehaviour
 
         _level++;
         LevelChanged?.Invoke(_level);
+        Audio.PlaySound("Lvlup");
 
         _maxHealth += _increaseHpOnLvlup;
         _currentHealth += _increaseHpOnLvlup;

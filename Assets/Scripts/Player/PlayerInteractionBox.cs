@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInteractionBox : MonoBehaviour
 {
-    private bool _canUse;
     private InteractableObject _targetObject;
 
     private void OnTriggerEnter(Collider other)
@@ -25,11 +24,14 @@ public class PlayerInteractionBox : MonoBehaviour
         }
     }
 
-    public void Use(Player player)
+    public bool Use(Player player)
     {
         if (_targetObject != null)
         {
             _targetObject.Interact(player);
+            return true;
         }
+
+        return false;
     }
 }
