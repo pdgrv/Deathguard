@@ -8,13 +8,14 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private int _expGived;
-    [SerializeField] private int _moneyGived; // сделать рандом
+    [SerializeField] private int _minMoneyGived;
+    [SerializeField] private int _maxMoneyGived;
 
     private Animator _animator;
     private CharacterController _controller;
 
     public int Exp => _expGived;
-    public int Money => _moneyGived;
+    public int Money { get; private set; }
 
     public Player Target { get; private set; }
 
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour
     public void Init(Player target)
     {
         Target = target;
+        Money = Random.Range(_minMoneyGived, _maxMoneyGived + 1);
     }
 
     private void DestroyComponents<T>() where T : MonoBehaviour
