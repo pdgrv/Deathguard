@@ -28,14 +28,14 @@ public class Player : MonoBehaviour
     public int TotalDamage { get; private set; }
     public bool IsAlive = true;
 
-    public PlayerAudio Audio { get; private set; }
+    public AudioClipManager Audio { get; private set; }
 
     private void Awake()
     {
         _armor = GetComponent<Armor>();
         _weapon = GetComponent<Weapon>();
 
-        Audio = GetComponent<PlayerAudio>();
+        Audio = GetComponent<AudioClipManager>();
     }
 
     private void Start()

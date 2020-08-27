@@ -19184,11 +19184,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audio: {fileID: 729033662}
   _clips:
-  - {fileID: 8300000, guid: aaab9452338ba4841a1b09893be6e7a1, type: 3}
-  - {fileID: 8300000, guid: acf052af39f19af438b8afce0ed66535, type: 3}
-  - {fileID: 8300000, guid: 2bf9827aad7b0b04bbc5940ce9500e32, type: 3}
-  - {fileID: 8300000, guid: 37277bd4342fff84bb213a00484b78ae, type: 3}
-  - {fileID: 8300000, guid: 1f1cb6b6a3c559a44afb33dbce3683d3, type: 3}
+  - Name: Swing
+    AudioClip: {fileID: 8300000, guid: aaab9452338ba4841a1b09893be6e7a1, type: 3}
+    RandomPitch: 1
+  - Name: ApplyDamage
+    AudioClip: {fileID: 8300000, guid: 37277bd4342fff84bb213a00484b78ae, type: 3}
+    RandomPitch: 1
+  - Name: Lvlup
+    AudioClip: {fileID: 8300000, guid: 2bf9827aad7b0b04bbc5940ce9500e32, type: 3}
+    RandomPitch: 0
+  - Name: Use
+    AudioClip: {fileID: 8300000, guid: acf052af39f19af438b8afce0ed66535, type: 3}
+    RandomPitch: 0
+  - Name: Die
+    AudioClip: {fileID: 8300000, guid: 1f1cb6b6a3c559a44afb33dbce3683d3, type: 3}
+    RandomPitch: 0
 --- !u!82 &729033662
 AudioSource:
   m_ObjectHideFlags: 0

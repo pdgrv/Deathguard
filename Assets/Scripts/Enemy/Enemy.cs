@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     private Animator _animator;
     private CharacterController _controller;
+    private AudioClipManager _audio;
 
     public int Exp => _expGived;
     public int Money { get; private set; }
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
+        _audio = GetComponent<AudioClipManager>();
     }
 
     public void ApplyDamage(int damage)
@@ -32,9 +34,15 @@ public class Enemy : MonoBehaviour
         _health -= damage;
 
         if (_health < 0)
+        {
             Die();
+            _audio.PlaySound("Die");
+        }
         else
+        {
             _animator.SetTrigger("ApplyDamage");
+            _audio.PlaySound("ApplyDamage");
+        }
     }
 
     private void Die()
