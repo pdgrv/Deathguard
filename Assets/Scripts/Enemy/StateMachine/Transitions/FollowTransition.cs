@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveTransition : Transition
+public class FollowTransition : Transition
 {
     private AttackState _attackState;
     private bool _isAttackNow;

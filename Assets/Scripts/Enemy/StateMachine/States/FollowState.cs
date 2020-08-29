@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : State
+public class FollowState : State
 {
     private void Update()
     {
