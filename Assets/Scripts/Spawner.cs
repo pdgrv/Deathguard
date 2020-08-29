@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private List<Level> _levels;
+    [SerializeField] private Menu _menu;
+    [SerializeField] private GameObject _endPanel;    
 
     private Level _currentLevel;
     private int _levelNumber;
@@ -21,7 +23,6 @@ public class Spawner : MonoBehaviour
     private float _timeAfterLastSpawn;
     private bool _isStopSpawn = true;
     private int _enemyAlive;
-
 
     public event UnityAction<int> LevelComplete;
 
@@ -56,7 +57,10 @@ public class Spawner : MonoBehaviour
                 if (_levelNumber + 1 < _levels.Count)
                     SetLevel(++_levelNumber);
                 else
-                    Debug.Log("Все уровни пройдены!"); //или сюда
+                {
+                    _menu.OpenPanel(_endPanel); //мб перенести на босса
+                    Debug.Log("Все уровни пройдены!");
+                }
             }
             return;
         }
@@ -69,13 +73,13 @@ public class Spawner : MonoBehaviour
 
             InstantiateEnemy();
             _spawned++;
-            _enemyAlive++;
         }
     }
 
     private void InstantiateEnemy()
     {
-        Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+        _enemyAlive++;
+        Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)]; 
         GameObject template = _currentWave.Template;
 
         Enemy enemy = Instantiate(template, spawnPoint.transform).GetComponent<Enemy>();
@@ -109,8 +113,7 @@ public class Spawner : MonoBehaviour
     }
 
     public void StartLevel()
-    {
-        //тут нужно ограничить чтобы последний уровень не переигрывался и сделать конец-демо-окошко)
+    {        
         SetWave(0);
         _isStopSpawn = false;
     }
