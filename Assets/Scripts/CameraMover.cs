@@ -16,6 +16,9 @@ public class CameraMover : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (_player == null)
+            return;
+
         Vector3 desiredPosition = _player.position - _offset;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed);
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject GameoverPanel;
+
     public void OpenPanel(GameObject panel)
     {
         panel.SetActive(true);
@@ -18,7 +20,7 @@ public class Menu : MonoBehaviour
 
     public void Exit()
     {
-        Debug.Log("Application quit.");
+        Debug.Log("Application quit.");        
         Application.Quit();
     }
 }

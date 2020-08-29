@@ -10,6 +10,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _jumpSpeed = 12f;
     [SerializeField] private float _gravityModifier = 3.5f;
 
+    private PlayerActions _playerActions;
+
     private float _speedMultiplier = 1f;
 
     private CharacterController _characterController;
@@ -29,6 +31,7 @@ public class CharacterMovement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _playerActions = GetComponent<PlayerActions>();
 
         _camera = Camera.main.transform;
 
@@ -57,6 +60,9 @@ public class CharacterMovement : MonoBehaviour
             LookDirection();
         }
         _animator.SetFloat("Speed", _move.magnitude);
+
+        if (_playerActions.IsAttack)
+            _move = Vector3.zero;
 
         if (_characterController.isGrounded)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Animator), typeof(CharacterController))]
+[RequireComponent(typeof(Animator), typeof(CharacterController), typeof(AudioClipManager))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     private Animator _animator;
     private CharacterController _controller;
-    private AudioClipManager _audio;
+    private AudioClipManager _audio;    
 
     public int Exp => _expGived;
     public int Money { get; private set; }

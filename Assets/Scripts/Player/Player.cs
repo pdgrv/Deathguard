@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     private Armor _armor; // изменить все-таки на значения и events от armor weapon и в actions
     private Weapon _weapon;
 
+    private Animator _animator;
+    private Menu _menu;
+
     private int _currentHealth;
     private int _level = 1;
     private int _currentExp = 0;
@@ -34,6 +37,9 @@ public class Player : MonoBehaviour
     {
         _armor = GetComponent<Armor>();
         _weapon = GetComponent<Weapon>();
+        _animator = GetComponent<Animator>();
+
+        _menu = FindObjectOfType<Menu>();
 
         Audio = GetComponent<AudioClipManager>();
     }
@@ -91,7 +97,10 @@ public class Player : MonoBehaviour
     {
         Debug.Log("вы проиграли.");
         Audio.PlaySound("Die");
+        _animator.SetTrigger("Die");
         IsAlive = false;
+
+        Destroy(gameObject, 4f);
     }
 
     public void AddReward(int exp, int money)
@@ -137,5 +146,10 @@ public class Player : MonoBehaviour
         _maxHealth += _increaseHpOnLvlup;
         _currentHealth += _increaseHpOnLvlup;
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
+    }
+
+    private void OnDestroy()
+    {
+        _menu.OpenPanel(_menu.GameoverPanel);
     }
 }
