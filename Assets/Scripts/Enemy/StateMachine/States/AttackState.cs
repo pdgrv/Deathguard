@@ -19,7 +19,8 @@ public class AttackState : State
     private void Update()
     {
         Animator.SetBool("Walk", false);
-        FaceTarget();
+        if (!IsAttack)
+            FaceTarget();
 
         if (_lastAttackTime <= 0)
         {
