@@ -58,7 +58,7 @@ public class Spawner : MonoBehaviour
                     SetLevel(++_levelNumber);
                 else
                 {
-                    _menu.OpenPanel(_endPanel); //мб перенести на босса
+                    _menu.OpenPanel(_endPanel);
                     Debug.Log("Все уровни пройдены!");
                 }
             }

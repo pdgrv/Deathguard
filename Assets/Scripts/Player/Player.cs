@@ -11,8 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] private int _needExp = 15;
     [SerializeField] private int _needExpIncrease = 15;
     [SerializeField] private int _increaseHpOnLvlup = 10;
+    [SerializeField] private int _money;
 
-    private Armor _armor; // изменить все-таки на значения и events от armor weapon и в actions
+    private Armor _armor;
     private Weapon _weapon;
 
     private Animator _animator;
@@ -21,7 +22,6 @@ public class Player : MonoBehaviour
     private int _currentHealth;
     private int _level = 1;
     private int _currentExp = 0;
-    public int _money;//паблик для тестов
 
     public event UnityAction<int, int> HealthChanged;
     public event UnityAction<int, int> ExpChanged;
