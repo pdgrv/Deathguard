@@ -57,7 +57,7 @@ public class AttackState : State
             if (hitCollider.TryGetComponent(out Player player))
             {
                 player.ApplyDamage(_damage);
-                Debug.Log(player.name + " получил пизды" + _damage);
+                Debug.Log(player.name + " получил пизды " + _damage);
             }
         }
 

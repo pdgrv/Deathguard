@@ -80,7 +80,7 @@ public class LevelStage : MonoBehaviour
 
         PlayStageSounds(_creepySounds, _peaceSounds);
 
-        _startingParticle.Pause();
+        _startingParticle.Stop();
 
         _spawner.StartLevel();
     }
@@ -101,6 +101,7 @@ public class LevelStage : MonoBehaviour
     public void ExitLevel()
     {
         _canStartLevel = true;
+
         _startingParticle.Play();
     }
 
@@ -110,8 +111,5 @@ public class LevelStage : MonoBehaviour
         {
             BeginLevel();
         }
-    }//можно сделать абстрактный компонент с этим скриптом, а местный ontriggerenter вьебать на отдельный триггер начала уровня.
+    }
 }
-
-//так же можно отделить всякие свистоперделки и сделать эвент вначале/вконце уровня подрубающий их и UI
-//+перенести эвент начала уровня со спавнера сюда

@@ -743,8 +743,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 50
   _expGived: 10
-  _minMoneyGived: 2
-  _maxMoneyGived: 5
+  _minMoneyGived: 3
+  _maxMoneyGived: 6
 --- !u!114 &2444941740764200638
 MonoBehaviour:
   m_ObjectHideFlags: 0
