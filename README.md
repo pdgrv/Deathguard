@@ -1,4 +1,4 @@
 # Deathguard - my graduation project of the IJunior online school.
 A lone hero guarding the boundaries of life. Slay monsters, upgrade your armor and weapon.
 
-https://drive.google.com/file/d/1ed1Ek0LTgLlTjGU9OZ6T6h-UaKHm-IqF/view?usp=sharing - gameplay
+[GAMEPLAY VIDEO](https://drive.google.com/file/d/1n3whs2Um3IzxHEN8e69uKN9bhEt74x8k/view?usp=sharing)
