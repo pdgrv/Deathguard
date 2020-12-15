@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Animator), typeof(Player))]
 public class PlayerActions : MonoBehaviour
@@ -28,7 +29,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && _lastAttackTime <= 0)
+        if (Input.GetButtonDown("Fire1") && _lastAttackTime <= 0 && !EventSystem.current.IsPointerOverGameObject())
         {
             if (attackJob != null) StopCoroutine(attackJob);
             attackJob = StartCoroutine(Attack($"Attack{attackID}"));

@@ -12,12 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField] private int _needExpIncrease = 15;
     [SerializeField] private int _increaseHpOnLvlup = 10;
     [SerializeField] private int _money;
+    [SerializeField] private Menu _menu;
 
     private Armor _armor;
     private Weapon _weapon;
 
     private Animator _animator;
-    private Menu _menu;
 
     private int _currentHealth;
     private int _level = 1;
@@ -38,8 +38,6 @@ public class Player : MonoBehaviour
         _armor = GetComponent<Armor>();
         _weapon = GetComponent<Weapon>();
         _animator = GetComponent<Animator>();
-
-        _menu = FindObjectOfType<Menu>();
 
         Audio = GetComponent<AudioClipManager>();
     }
@@ -150,6 +148,6 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        _menu.OpenPanel(_menu.GameoverPanel);
+        _menu?.OpenPanel(_menu.GameoverPanel);
     }
 }

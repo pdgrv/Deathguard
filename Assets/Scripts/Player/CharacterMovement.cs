@@ -8,6 +8,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _rotationSpeed = 12f;
     [SerializeField] private float _jumpSpeed = 12f;
+    [SerializeField] private float _rollRange = 10f;
+    [SerializeField] private float _rollSpeed = 5f;
     [SerializeField] private float _gravityModifier = 3.5f;
 
     private PlayerActions _playerActions;
@@ -25,6 +27,10 @@ public class CharacterMovement : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
 
+    private bool _canMove = true;
+
+    private float _rollRangeLeft = 0f;
+
     private Vector3 _move;
 
     private void Start()
@@ -41,7 +47,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        Movement();
+        Roll();
+
+        if (_canMove)
+            Movement();
+
     }
 
     private void Movement()
@@ -92,6 +102,30 @@ public class CharacterMovement : MonoBehaviour
         _move.y = _vertSpeed;
 
         _characterController.Move(_move * Time.deltaTime);
+    }
+
+    private void Roll()
+    {
+        if (Input.GetButtonDown("Fire2") && _characterController.isGrounded)
+        {
+            _animator.SetTrigger("Roll");
+
+            _rollRangeLeft = _rollRange;
+
+            _canMove = false;
+        }
+
+        if (_rollRangeLeft > 0) 
+        {
+            var moveDelta = _rollSpeed * Time.deltaTime;
+            _characterController.Move(transform.forward * moveDelta);
+
+            _rollRangeLeft -= moveDelta;
+        }
+        else
+        {
+            _canMove = true;
+        }
     }
 
     private void LookDirection()
